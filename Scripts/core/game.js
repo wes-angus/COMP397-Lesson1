@@ -16,15 +16,11 @@
     }
     //main game loop
     function Update() {
-        helloLabel.rotation += 5;
+        //helloLabel.rotation += 5;
         stage.update();
     }
     function Main() {
-        helloLabel = new createjs.Text("Hello, World!", "60px Consolas", "#000000");
-        helloLabel.regX = helloLabel.getBounds().width * 0.5;
-        helloLabel.regY = helloLabel.getBounds().height * 0.5;
-        helloLabel.x = 320;
-        helloLabel.y = 240;
+        helloLabel = new objects.Label("Hello, World!", "60px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
         clickMeButton = new createjs.Bitmap("/Assets/images/clickMeButton.png");
         clickMeButton.regX = clickMeButton.getBounds().width * 0.5;
