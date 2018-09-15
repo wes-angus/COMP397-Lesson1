@@ -13,35 +13,35 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Label = /** @class */ (function (_super) {
-        __extends(Label, _super);
+    var Button = /** @class */ (function (_super) {
+        __extends(Button, _super);
         //constructor
         /**
-         * Creates an instance of Label.
-         * @param labelString
-         * @param fontSize
-         * @param fontFamily
-         * @param fontColour
+         * Creates an instance of Button.
+         * @param imageString
          * @param x
          * @param y
          * @param isCentered
          */
-        function Label(labelString, fontSize, fontFamily, fontColour, x, y, isCentered) {
+        function Button(imageString, x, y, isCentered) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
-            var _this = _super.call(this, labelString, fontSize + ' ' + fontFamily, fontColour) || this;
-            _this.Width = _this.getMeasuredWidth();
-            _this.Height = _this.getMeasuredHeight();
+            var _this = _super.call(this, imageString) || this;
+            _this.Width = _this.getBounds().width;
+            _this.Height = _this.getBounds().height;
             if (isCentered) {
                 _this.regX = _this._halfWidth;
                 _this.regY = _this._halfHeight;
             }
             _this.x = x;
             _this.y = y;
+            //event listeners
+            _this.on("mouseover", _this._over);
+            _this.on("mouseout", _this._out);
             return _this;
         }
-        Object.defineProperty(Label.prototype, "Width", {
+        Object.defineProperty(Button.prototype, "Width", {
             //public properties
             get: function () {
                 return this._width;
@@ -53,14 +53,14 @@ var objects;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Label.prototype, "HalfWidth", {
+        Object.defineProperty(Button.prototype, "HalfWidth", {
             get: function () {
                 return this._halfWidth;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Label.prototype, "Height", {
+        Object.defineProperty(Button.prototype, "Height", {
             get: function () {
                 return this._height;
             },
@@ -71,15 +71,22 @@ var objects;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Label.prototype, "HalfHeight", {
+        Object.defineProperty(Button.prototype, "HalfHeight", {
             get: function () {
                 return this._halfWidth;
             },
             enumerable: true,
             configurable: true
         });
-        return Label;
-    }(createjs.Text));
-    objects.Label = Label;
+        //private methods
+        Button.prototype._over = function (event) {
+            this.alpha = 0.7;
+        };
+        Button.prototype._out = function (event) {
+            this.alpha = 1;
+        };
+        return Button;
+    }(createjs.Bitmap));
+    objects.Button = Button;
 })(objects || (objects = {}));
-//# sourceMappingURL=label.js.map
+//# sourceMappingURL=button.js.map

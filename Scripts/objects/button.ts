@@ -1,5 +1,5 @@
 module objects {
-    export class Label extends createjs.Text {
+    export class Button extends createjs.Bitmap {
         //private instance vars
         private _width: number;
         private _height: number;
@@ -32,34 +32,39 @@ module objects {
         //constructor
 
         /**
-         * Creates an instance of Label.
-         * @param labelString 
-         * @param fontSize 
-         * @param fontFamily 
-         * @param fontColour 
+         * Creates an instance of Button.
+         * @param imageString 
          * @param x 
          * @param y 
          * @param isCentered 
          */
-        constructor(
-            labelString: string,
-            fontSize: string, fontFamily: string, fontColour: string,
-            x: number = 0, y: number = 0, isCentered: boolean = false) {
-            super(labelString, fontSize + ' ' + fontFamily, fontColour);
+        constructor(imageString: string, x: number = 0, y: number = 0, isCentered: boolean = false) {
+            super(imageString);
 
-            this.Width = this.getMeasuredWidth();
-            this.Height = this.getMeasuredHeight();
+            this.Width = this.getBounds().width;
+            this.Height = this.getBounds().height;
 
-            if(isCentered) {
+            if (isCentered) {
                 this.regX = this._halfWidth;
                 this.regY = this._halfHeight;
             }
 
             this.x = x;
             this.y = y;
+
+            //event listeners
+            this.on("mouseover", this._over);
+            this.on("mouseout", this._out);
         }
 
         //private methods
+        private _over(event: createjs.MouseEvent): void {
+            this.alpha = 0.7;
+        }
+
+        private _out(event: createjs.MouseEvent): void {
+            this.alpha = 1;
+        }
 
         //public methods
     }

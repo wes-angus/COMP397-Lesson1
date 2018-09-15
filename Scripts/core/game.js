@@ -22,20 +22,10 @@
     function Main() {
         helloLabel = new objects.Label("Hello, World!", "60px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
-        clickMeButton = new createjs.Bitmap("/Assets/images/clickMeButton.png");
-        clickMeButton.regX = clickMeButton.getBounds().width * 0.5;
-        clickMeButton.regY = clickMeButton.getBounds().height * 0.5;
-        clickMeButton.x = 320;
-        clickMeButton.y = 360;
+        clickMeButton = new objects.Button("/Assets/images/clickMeButton.png", 320, 360, true);
         stage.addChild(clickMeButton);
         clickMeButton.on("click", function () {
             helloLabel.text = "Clicked!";
-        });
-        clickMeButton.on("mouseover", function () {
-            clickMeButton.alpha = 0.7;
-        });
-        clickMeButton.on("mouseout", function () {
-            clickMeButton.alpha = 1.0;
         });
     }
     window.addEventListener("load", Start);
