@@ -33,13 +33,13 @@ module objects {
 
         /**
          * Creates an instance of Button.
-         * @param imageString 
+         * @param imageId 
          * @param x 
          * @param y 
          * @param isCentered 
          */
-        constructor(imageString: string, x: number = 0, y: number = 0, isCentered: boolean = false) {
-            super(imageString);
+        constructor(imageId: string, x: number = 0, y: number = 0, isCentered: boolean = false) {
+            super(managers.Game.assetManager.getResult(imageId));
 
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;

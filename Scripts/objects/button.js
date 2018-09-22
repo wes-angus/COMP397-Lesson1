@@ -18,16 +18,16 @@ var objects;
         //constructor
         /**
          * Creates an instance of Button.
-         * @param imageString
+         * @param imageId
          * @param x
          * @param y
          * @param isCentered
          */
-        function Button(imageString, x, y, isCentered) {
+        function Button(imageId, x, y, isCentered) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
-            var _this = _super.call(this, imageString) || this;
+            var _this = _super.call(this, managers.Game.assetManager.getResult(imageId)) || this;
             _this.Width = _this.getBounds().width;
             _this.Height = _this.getBounds().height;
             if (isCentered) {

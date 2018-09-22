@@ -5,6 +5,17 @@
     var stage;
     var helloLabel;
     var clickMeButton;
+    var assetManager;
+    var assetManifest = [
+        { id: "clickMeButton", src: "/Assets/images/clickMeButton.png" }
+    ];
+    function Init() {
+        assetManager = new createjs.LoadQueue();
+        managers.Game.assetManager = assetManager; //global reference to assetManager
+        assetManager.installPlugin(createjs.Sound); //enable sound preloading
+        assetManager.loadManifest(assetManifest); //preloads assets listed in the manifest
+        assetManager.on("complete", Start); //call Start when assets are finished loading
+    }
     function Start() {
         console.log("%c Game Somewhat Started...", "color: blue; font-size: 20px;");
         canvas = document.getElementsByTagName("canvas")[0];
@@ -22,12 +33,12 @@
     function Main() {
         helloLabel = new objects.Label("Hello, World!", "60px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
-        clickMeButton = new objects.Button("/Assets/images/clickMeButton.png", 320, 360, true);
+        clickMeButton = new objects.Button("clickMeButton", 320, 360, true);
         stage.addChild(clickMeButton);
         clickMeButton.on("click", function () {
             helloLabel.text = "Clicked!";
         });
     }
-    window.addEventListener("load", Start);
+    window.addEventListener("load", Init);
 })();
 //# sourceMappingURL=game.js.map
