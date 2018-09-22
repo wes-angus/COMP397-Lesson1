@@ -18,55 +18,18 @@ var objects;
         //constructors
         function Player(y) {
             if (y === void 0) { y = 435; }
-            var _this = _super.call(this, managers.Game.assetManager.getResult("plane")) || this;
+            var _this = _super.call(this, "plane") || this;
             _this.y = y;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Player.prototype, "Width", {
-            //public props
-            get: function () {
-                return this._width;
-            },
-            set: function (newVal) {
-                this._width = newVal;
-                this._halfWidth = newVal * 0.5;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Player.prototype, "HalfWidth", {
-            get: function () {
-                return this._halfWidth;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Player.prototype, "Height", {
-            get: function () {
-                return this._height;
-            },
-            set: function (newVal) {
-                this._height = newVal;
-                this._halfHeight = newVal * 0.5;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Player.prototype, "HalfHeight", {
-            get: function () {
-                return this._halfWidth;
-            },
-            enumerable: true,
-            configurable: true
-        });
         //private methods
         //public methods
         Player.prototype.Start = function () {
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;
-            this.regX = this._halfWidth;
-            this.regY = this._halfHeight;
+            this.regX = this.HalfWidth;
+            this.regY = this.HalfHeight;
         };
         Player.prototype.Update = function () {
             this.x = managers.Game.stage.mouseX;
@@ -78,7 +41,7 @@ var objects;
             }
         };
         return Player;
-    }(createjs.Bitmap));
+    }(objects.GameObject));
     objects.Player = Player;
 })(objects || (objects = {}));
 //# sourceMappingURL=player.js.map
