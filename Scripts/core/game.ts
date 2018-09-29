@@ -46,8 +46,11 @@
     }
 
     function Main(): void {
+        //Ocean background
         ocean = new objects.Ocean();
         stage.addChild(ocean);
+
+        //Player object
         player = new objects.Player();
         stage.addChild(player);
     }
