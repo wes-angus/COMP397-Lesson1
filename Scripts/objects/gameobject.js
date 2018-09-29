@@ -16,9 +16,9 @@ var objects;
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
         //constructors
-        function GameObject(imageId) {
+        function GameObject(imageId, isCentered) {
             var _this = _super.call(this, managers.Game.assetManager.getResult(imageId)) || this;
-            _this._init();
+            _this._init(isCentered);
             return _this;
         }
         Object.defineProperty(GameObject.prototype, "Width", {
@@ -59,18 +59,13 @@ var objects;
             configurable: true
         });
         //private methods
-        GameObject.prototype._init = function () {
+        GameObject.prototype._init = function (isCentered) {
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;
-        };
-        //public methods
-        GameObject.prototype.Reset = function () {
-        };
-        GameObject.prototype.Destroy = function () {
-        };
-        GameObject.prototype.Start = function () {
-        };
-        GameObject.prototype.Update = function () {
+            if (isCentered) {
+                this.regX = this.HalfWidth;
+                this.regY = this.HalfHeight;
+            }
         };
         return GameObject;
     }(createjs.Bitmap));

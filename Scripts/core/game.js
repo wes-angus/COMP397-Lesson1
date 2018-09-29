@@ -6,6 +6,7 @@
     var assetManager;
     //Game objects
     var player;
+    var ocean;
     var assetManifest = [
         { id: "plane", src: "/Assets/images/plane.png" },
         { id: "cloud", src: "/Assets/images/cloud.png" },
@@ -34,10 +35,13 @@
     }
     //main game loop
     function Update() {
+        ocean.Update();
         player.Update();
         stage.update();
     }
     function Main() {
+        ocean = new objects.Ocean();
+        stage.addChild(ocean);
         player = new objects.Player();
         stage.addChild(player);
     }

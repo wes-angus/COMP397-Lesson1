@@ -3,7 +3,7 @@ module objects {
 
         //constructors
         constructor(y: number = 435) {
-            super("plane");
+            super("plane", true);
 
             this.y = y;
 
@@ -13,13 +13,15 @@ module objects {
         //private methods
 
         //public methods
-        public Start(): void {
-            this.Width = this.getBounds().width;
-            this.Height = this.getBounds().height;
-            this.regX = this.HalfWidth;
-            this.regY = this.HalfHeight;
+        public Reset(): void {
+            
         }
-
+        public Destroy(): void {
+            
+        }
+        public Start(): void {
+            
+        }
         public Update(): void {
             this.x = managers.Game.stage.mouseX;
 

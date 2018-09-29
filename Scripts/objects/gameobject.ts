@@ -30,33 +30,30 @@ module objects {
         }
 
         //constructors
-        constructor(imageId: string) {
+        constructor(imageId: string, isCentered: boolean) {
             super(managers.Game.assetManager.getResult(imageId));
 
-            this._init();
+            this._init(isCentered);
         }
 
         //private methods
-        private _init(): void {
+        private _init(isCentered: boolean): void {
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;
+            
+            if (isCentered) {
+                this.regX = this.HalfWidth;
+                this.regY = this.HalfHeight;
+            }
         }
 
         //public methods
-        public Reset(): void {
+        public abstract Reset(): void;
 
-        }
+        public abstract Destroy(): void;
 
-        public Destroy() : void {
+        public abstract Start(): void;
 
-        }
-
-        public Start(): void {
-            
-        }
-
-        public Update(): void {
-            
-        }
+        public abstract Update(): void;
     }
 }

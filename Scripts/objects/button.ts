@@ -10,12 +10,7 @@ module objects {
          * @param isCentered 
          */
         constructor(imageId: string, x: number = 0, y: number = 0, isCentered: boolean = false) {
-            super(imageId);
-
-            if (isCentered) {
-                this.regX = this.HalfWidth;
-                this.regY = this.HalfHeight;
-            }
+            super(imageId, isCentered);
 
             this.x = x;
             this.y = y;
@@ -35,5 +30,17 @@ module objects {
         }
 
         //public methods
+        public Reset(): void {
+            
+        }
+        public Destroy(): void {
+            
+        }
+        public Start(): void {
+            
+        }
+        public Update(): void {
+            
+        }
     }
 }

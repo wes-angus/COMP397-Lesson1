@@ -27,11 +27,7 @@ var objects;
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
-            var _this = _super.call(this, imageId) || this;
-            if (isCentered) {
-                _this.regX = _this.HalfWidth;
-                _this.regY = _this.HalfHeight;
-            }
+            var _this = _super.call(this, imageId, isCentered) || this;
             _this.x = x;
             _this.y = y;
             //event listeners
@@ -45,6 +41,15 @@ var objects;
         };
         Button.prototype._out = function (event) {
             this.alpha = 1;
+        };
+        //public methods
+        Button.prototype.Reset = function () {
+        };
+        Button.prototype.Destroy = function () {
+        };
+        Button.prototype.Start = function () {
+        };
+        Button.prototype.Update = function () {
         };
         return Button;
     }(objects.GameObject));

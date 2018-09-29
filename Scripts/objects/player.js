@@ -18,18 +18,18 @@ var objects;
         //constructors
         function Player(y) {
             if (y === void 0) { y = 435; }
-            var _this = _super.call(this, "plane") || this;
+            var _this = _super.call(this, "plane", true) || this;
             _this.y = y;
             _this.Start();
             return _this;
         }
         //private methods
         //public methods
+        Player.prototype.Reset = function () {
+        };
+        Player.prototype.Destroy = function () {
+        };
         Player.prototype.Start = function () {
-            this.Width = this.getBounds().width;
-            this.Height = this.getBounds().height;
-            this.regX = this.HalfWidth;
-            this.regY = this.HalfHeight;
         };
         Player.prototype.Update = function () {
             this.x = managers.Game.stage.mouseX;

@@ -7,6 +7,7 @@
 
     //Game objects
     let player: objects.Player;
+    let ocean: objects.Ocean;
 
     let assetManifest = [
         { id: "plane", src: "/Assets/images/plane.png" },
@@ -39,11 +40,14 @@
 
     //main game loop
     function Update(): void {
+        ocean.Update();
         player.Update();
         stage.update();
     }
 
     function Main(): void {
+        ocean = new objects.Ocean();
+        stage.addChild(ocean);
         player = new objects.Player();
         stage.addChild(player);
     }
