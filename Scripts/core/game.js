@@ -4,9 +4,7 @@
     var canvas;
     var stage;
     var assetManager;
-    //Game objects
-    var player;
-    var ocean;
+    var level1;
     var assetManifest = [
         { id: "plane", src: "/Assets/images/plane.png" },
         { id: "cloud", src: "/Assets/images/cloud.png" },
@@ -24,7 +22,7 @@
         assetManager.on("complete", Start); //call Start when assets are finished loading
     }
     function Start() {
-        console.log("%c Game Somewhat Started...", "color: blue; font-size: 20px;");
+        console.log("%c Game Started...", "color: blue; font-size: 20px;");
         canvas = document.getElementsByTagName("canvas")[0];
         stage = new createjs.Stage(canvas);
         managers.Game.stage = stage; //global ref. to stage
@@ -35,17 +33,13 @@
     }
     //main game loop
     function Update() {
-        ocean.Update();
-        player.Update();
+        level1.Update();
         stage.update();
     }
     function Main() {
-        //Ocean background
-        ocean = new objects.Ocean();
-        stage.addChild(ocean);
-        //Player object
-        player = new objects.Player();
-        stage.addChild(player);
+        //add the scene to the stage
+        level1 = new scenes.Level1();
+        stage.addChild(level1);
     }
     window.addEventListener("load", Init);
 })();
