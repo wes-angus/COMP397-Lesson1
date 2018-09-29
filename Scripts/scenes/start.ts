@@ -1,9 +1,9 @@
 module scenes {
-    export class Level1 extends objects.Scene {
+    export class Start extends objects.Scene {
         //private inst. vars
-        //Game objects
-        private _player: objects.Player;
         private _ocean: objects.Ocean;
+        private _welcomeLbl: objects.Label;
+        private _startBtn: objects.Button;
 
         //public props
 
@@ -22,21 +22,23 @@ module scenes {
         public Destroy(): void {
         }
         public Start(): void {
-            //Ocean background
             this._ocean = new objects.Ocean();
+            this._welcomeLbl = new objects.Label("Mail Pilot", "60px", "Consolas", "#FFFF00", 320, 240, true);
+            this._startBtn = new objects.Button("clickMeButton", 320, 360, true);
 
-            //Player object
-            this._player = new objects.Player();
-            
             this.Main();
         }
         public Update(): void {
             this._ocean.Update();
-            this._player.Update();
         }
         public Main(): void {
             this.addChild(this._ocean);
-            this.addChild(this._player);
+            this.addChild(this._welcomeLbl);
+            this.addChild(this._startBtn);
+
+            this._startBtn.on("click", function() {
+                //Load Level1 scene
+            });
         }
     }
 }

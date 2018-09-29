@@ -4,8 +4,10 @@
     var canvas;
     var stage;
     var assetManager;
-    var level1;
+    var curScene;
+    var curState;
     var assetManifest = [
+        { id: "clickMeButton", src: "/Assets/images/clickMeButton.png" },
         { id: "plane", src: "/Assets/images/plane.png" },
         { id: "cloud", src: "/Assets/images/cloud.png" },
         { id: "island", src: "/Assets/images/island.png" },
@@ -33,13 +35,13 @@
     }
     //main game loop
     function Update() {
-        level1.Update();
+        curScene.Update();
         stage.update();
     }
     function Main() {
         //add the scene to the stage
-        level1 = new scenes.Level1();
-        stage.addChild(level1);
+        curScene = new scenes.Level1();
+        stage.addChild(curScene);
     }
     window.addEventListener("load", Init);
 })();

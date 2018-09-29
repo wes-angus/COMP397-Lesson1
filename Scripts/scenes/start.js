@@ -13,38 +13,40 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var Level1 = /** @class */ (function (_super) {
-        __extends(Level1, _super);
+    var Start = /** @class */ (function (_super) {
+        __extends(Start, _super);
         //public props
         //constructor
-        function Level1() {
+        function Start() {
             var _this = _super.call(this) || this;
             _this.Start();
             return _this;
         }
         //private methods
         //public methods
-        Level1.prototype.Reset = function () {
+        Start.prototype.Reset = function () {
         };
-        Level1.prototype.Destroy = function () {
+        Start.prototype.Destroy = function () {
         };
-        Level1.prototype.Start = function () {
-            //Ocean background
+        Start.prototype.Start = function () {
             this._ocean = new objects.Ocean();
-            //Player object
-            this._player = new objects.Player();
+            this._welcomeLbl = new objects.Label("Mail Pilot", "60px", "Consolas", "#FFFF00", 320, 240, true);
+            this._startBtn = new objects.Button("clickMeButton", 320, 360, true);
             this.Main();
         };
-        Level1.prototype.Update = function () {
+        Start.prototype.Update = function () {
             this._ocean.Update();
-            this._player.Update();
         };
-        Level1.prototype.Main = function () {
+        Start.prototype.Main = function () {
             this.addChild(this._ocean);
-            this.addChild(this._player);
+            this.addChild(this._welcomeLbl);
+            this.addChild(this._startBtn);
+            this._startBtn.on("click", function () {
+                //Load Level1 scene
+            });
         };
-        return Level1;
+        return Start;
     }(objects.Scene));
-    scenes.Level1 = Level1;
+    scenes.Start = Start;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=level1.js.map
+//# sourceMappingURL=start.js.map

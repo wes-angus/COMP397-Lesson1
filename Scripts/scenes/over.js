@@ -13,38 +13,37 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var Level1 = /** @class */ (function (_super) {
-        __extends(Level1, _super);
+    var Over = /** @class */ (function (_super) {
+        __extends(Over, _super);
         //public props
         //constructor
-        function Level1() {
+        function Over() {
             var _this = _super.call(this) || this;
             _this.Start();
             return _this;
         }
         //private methods
         //public methods
-        Level1.prototype.Reset = function () {
+        Over.prototype.Reset = function () {
         };
-        Level1.prototype.Destroy = function () {
+        Over.prototype.Destroy = function () {
         };
-        Level1.prototype.Start = function () {
-            //Ocean background
-            this._ocean = new objects.Ocean();
-            //Player object
-            this._player = new objects.Player();
+        Over.prototype.Start = function () {
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
+            this._restartBtn = new objects.Button("clickMeButton", 320, 360, true);
             this.Main();
         };
-        Level1.prototype.Update = function () {
-            this._ocean.Update();
-            this._player.Update();
+        Over.prototype.Update = function () {
         };
-        Level1.prototype.Main = function () {
-            this.addChild(this._ocean);
-            this.addChild(this._player);
+        Over.prototype.Main = function () {
+            this.addChild(this._gameOverLbl);
+            this.addChild(this._restartBtn);
+            this._restartBtn.on("click", function () {
+                //Load Level1 scene
+            });
         };
-        return Level1;
+        return Over;
     }(objects.Scene));
-    scenes.Level1 = Level1;
+    scenes.Over = Over;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=level1.js.map
+//# sourceMappingURL=over.js.map

@@ -5,9 +5,11 @@
     let stage: createjs.Stage;
     let assetManager: createjs.LoadQueue;
 
-    let level1: scenes.Level1;
+    let curScene: objects.Scene;
+    let curState: number;
 
     let assetManifest = [
+        { id: "clickMeButton", src: "/Assets/images/clickMeButton.png" },
         { id: "plane", src: "/Assets/images/plane.png" },
         { id: "cloud", src: "/Assets/images/cloud.png" },
         { id: "island", src: "/Assets/images/island.png" },
@@ -38,14 +40,14 @@
 
     //main game loop
     function Update(): void {
-        level1.Update();
+        curScene.Update();
         stage.update();
     }
 
     function Main(): void {
         //add the scene to the stage
-        level1 = new scenes.Level1();
-        stage.addChild(level1);
+        curScene = new scenes.Level1();
+        stage.addChild(curScene);
     }
 
     window.addEventListener("load", Init);
