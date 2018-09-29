@@ -1,13 +1,14 @@
 module objects {
-    export class Ocean extends objects.GameObject {
+    export class Cloud extends objects.GameObject {
         //private inst. vars
         private _verticalSpeed: number;
+        private _horizSpeed: number;
 
         //public props
 
         //constructor
         constructor() {
-            super("ocean", false);
+            super("cloud", false);
 
             this.Start();
         }
@@ -15,23 +16,26 @@ module objects {
         //private methods
         _move(): void {
             this.y += this._verticalSpeed;
+            this.x += this._horizSpeed;
         }
         _checkBounds(): void {
-            if (this.y >= 0) {
+            if (this.y > 480 + this.Height) {
                 this.Reset();
             }
         }
 
         //public methods
         public Reset(): void {
-            this.y = -960;
+            this._verticalSpeed = Math.floor(Math.random() * 5) + 5;
+            this._horizSpeed = Math.floor(Math.random() * 4) - 2;
+            this.y = -this.Height;
+            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
         }
         public Destroy(): void {
 
         }
         public Start(): void {
             this.Reset();
-            this._verticalSpeed = 5; //5px per frame
         }
         public Update(): void {
             this._move();

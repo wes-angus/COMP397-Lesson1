@@ -1,5 +1,5 @@
 module objects {
-    export class Ocean extends objects.GameObject {
+    export class Island extends objects.GameObject {
         //private inst. vars
         private _verticalSpeed: number;
 
@@ -7,7 +7,7 @@ module objects {
 
         //constructor
         constructor() {
-            super("ocean", false);
+            super("island", false);
 
             this.Start();
         }
@@ -17,21 +17,22 @@ module objects {
             this.y += this._verticalSpeed;
         }
         _checkBounds(): void {
-            if (this.y >= 0) {
+            if (this.y > 480 + this.Height) {
                 this.Reset();
             }
         }
 
         //public methods
         public Reset(): void {
-            this.y = -960;
+            this._verticalSpeed = 5;
+            this.y = -this.Height;
+            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
         }
         public Destroy(): void {
 
         }
         public Start(): void {
             this.Reset();
-            this._verticalSpeed = 5; //5px per frame
         }
         public Update(): void {
             this._move();

@@ -13,40 +13,41 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Ocean = /** @class */ (function (_super) {
-        __extends(Ocean, _super);
+    var Island = /** @class */ (function (_super) {
+        __extends(Island, _super);
         //public props
         //constructor
-        function Ocean() {
-            var _this = _super.call(this, "ocean", false) || this;
+        function Island() {
+            var _this = _super.call(this, "island", false) || this;
             _this.Start();
             return _this;
         }
         //private methods
-        Ocean.prototype._move = function () {
+        Island.prototype._move = function () {
             this.y += this._verticalSpeed;
         };
-        Ocean.prototype._checkBounds = function () {
-            if (this.y >= 0) {
+        Island.prototype._checkBounds = function () {
+            if (this.y > 480 + this.Height) {
                 this.Reset();
             }
         };
         //public methods
-        Ocean.prototype.Reset = function () {
-            this.y = -960;
+        Island.prototype.Reset = function () {
+            this._verticalSpeed = 5;
+            this.y = -this.Height;
+            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
         };
-        Ocean.prototype.Destroy = function () {
+        Island.prototype.Destroy = function () {
         };
-        Ocean.prototype.Start = function () {
+        Island.prototype.Start = function () {
             this.Reset();
-            this._verticalSpeed = 5; //5px per frame
         };
-        Ocean.prototype.Update = function () {
+        Island.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        return Ocean;
+        return Island;
     }(objects.GameObject));
-    objects.Ocean = Ocean;
+    objects.Island = Island;
 })(objects || (objects = {}));
-//# sourceMappingURL=ocean.js.map
+//# sourceMappingURL=island.js.map

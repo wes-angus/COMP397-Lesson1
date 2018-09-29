@@ -13,40 +13,43 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Ocean = /** @class */ (function (_super) {
-        __extends(Ocean, _super);
+    var Cloud = /** @class */ (function (_super) {
+        __extends(Cloud, _super);
         //public props
         //constructor
-        function Ocean() {
-            var _this = _super.call(this, "ocean", false) || this;
+        function Cloud() {
+            var _this = _super.call(this, "cloud", false) || this;
             _this.Start();
             return _this;
         }
         //private methods
-        Ocean.prototype._move = function () {
+        Cloud.prototype._move = function () {
             this.y += this._verticalSpeed;
+            this.x += this._horizSpeed;
         };
-        Ocean.prototype._checkBounds = function () {
-            if (this.y >= 0) {
+        Cloud.prototype._checkBounds = function () {
+            if (this.y > 480 + this.Height) {
                 this.Reset();
             }
         };
         //public methods
-        Ocean.prototype.Reset = function () {
-            this.y = -960;
+        Cloud.prototype.Reset = function () {
+            this._verticalSpeed = Math.floor(Math.random() * 5) + 5;
+            this._horizSpeed = Math.floor(Math.random() * 4) - 2;
+            this.y = -this.Height;
+            this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
         };
-        Ocean.prototype.Destroy = function () {
+        Cloud.prototype.Destroy = function () {
         };
-        Ocean.prototype.Start = function () {
+        Cloud.prototype.Start = function () {
             this.Reset();
-            this._verticalSpeed = 5; //5px per frame
         };
-        Ocean.prototype.Update = function () {
+        Cloud.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        return Ocean;
+        return Cloud;
     }(objects.GameObject));
-    objects.Ocean = Ocean;
+    objects.Cloud = Cloud;
 })(objects || (objects = {}));
-//# sourceMappingURL=ocean.js.map
+//# sourceMappingURL=cloud.js.map

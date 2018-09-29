@@ -1,5 +1,5 @@
 module config {
-    enum Scene {
+    export enum Scene {
         START,
         LEVEL1,
         OVER,

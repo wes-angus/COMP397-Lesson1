@@ -20,11 +20,12 @@ module scenes {
         public Reset(): void {
         }
         public Destroy(): void {
+            this.removeAllChildren();
         }
         public Start(): void {
             this._ocean = new objects.Ocean();
             this._welcomeLbl = new objects.Label("Mail Pilot", "60px", "Consolas", "#FFFF00", 320, 240, true);
-            this._startBtn = new objects.Button("clickMeButton", 320, 360, true);
+            this._startBtn = new objects.Button("startButton", 320, 360, true);
 
             this.Main();
         }
@@ -36,8 +37,8 @@ module scenes {
             this.addChild(this._welcomeLbl);
             this.addChild(this._startBtn);
 
-            this._startBtn.on("click", function() {
-                //Load Level1 scene
+            this._startBtn.on("click", () => {
+                managers.Game.curState = config.Scene.LEVEL1;
             });
         }
     }

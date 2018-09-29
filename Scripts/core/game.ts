@@ -6,10 +6,11 @@
     let assetManager: createjs.LoadQueue;
 
     let curScene: objects.Scene;
-    let curState: number;
+    let curState: config.Scene;
 
     let assetManifest = [
-        { id: "clickMeButton", src: "/Assets/images/clickMeButton.png" },
+        { id: "startButton", src: "/Assets/images/startButton.png" },
+        { id: "restartButton", src: "/Assets/images/restartButton.png" },
         { id: "plane", src: "/Assets/images/plane.png" },
         { id: "cloud", src: "/Assets/images/cloud.png" },
         { id: "island", src: "/Assets/images/island.png" },
@@ -35,20 +36,42 @@
         stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", Update);
+        curState = config.Scene.START;
+        managers.Game.curState = curState;
+
         Main();
     }
 
     //main game loop
     function Update(): void {
         curScene.Update();
+
+        if (curState != managers.Game.curState) {
+            curState = managers.Game.curState;
+            Main();
+        }
+        
         stage.update();
     }
 
     function Main(): void {
-        //add the scene to the stage
-        curScene = new scenes.Level1();
+        if (curScene) {
+            curScene.Destroy();
+            stage.removeAllChildren();
+        }
+        switch (curState) {
+            case config.Scene.START:
+                curScene = new scenes.Start();
+                break;
+            case config.Scene.LEVEL1:
+                curScene = new scenes.Level1();
+                break;
+            case config.Scene.OVER:
+                curScene = new scenes.Over();
+                break;
+        }
         stage.addChild(curScene);
     }
 
     window.addEventListener("load", Init);
-})();
+});
