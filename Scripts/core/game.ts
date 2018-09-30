@@ -36,9 +36,9 @@
         stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", Update);
+
         curState = config.Scene.START;
         managers.Game.curState = curState;
-
         Main();
     }
 
@@ -74,4 +74,4 @@
     }
 
     window.addEventListener("load", Init);
-});
+})();

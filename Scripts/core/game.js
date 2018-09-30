@@ -64,5 +64,5 @@
         stage.addChild(curScene);
     }
     window.addEventListener("load", Init);
-});
+})();
 //# sourceMappingURL=game.js.map
