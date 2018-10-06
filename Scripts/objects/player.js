@@ -40,6 +40,16 @@ var objects;
                 this.x = this.HalfWidth;
             }
         };
+        //Assumes both objects are centered
+        Player.prototype.checkIntersection = function (other) {
+            if (this.x - this.HalfWidth < other.x + other.Width &&
+                this.x + this.HalfWidth > other.x &&
+                this.y - this.HalfHeight < other.y + other.Height &&
+                this.y + this.HalfHeight > other.y) {
+                return true;
+            }
+            return false;
+        };
         return Player;
     }(objects.GameObject));
     objects.Player = Player;

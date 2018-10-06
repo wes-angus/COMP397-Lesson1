@@ -20,6 +20,7 @@ var scenes;
         function Level1() {
             var _this = _super.call(this) || this;
             _this._cloudNum = 3;
+            _this.collided = false;
             _this.Start();
             return _this;
         }
@@ -53,6 +54,15 @@ var scenes;
             for (var _i = 0, _a = this._clouds; _i < _a.length; _i++) {
                 var cloud = _a[_i];
                 cloud.Update();
+            }
+            if (this._player.checkIntersection(this._island)) {
+                if (!this.collided) {
+                    this.collided = true;
+                    console.log("Mail Delivered!");
+                }
+            }
+            else {
+                this.collided = false;
             }
         };
         Level1.prototype.Main = function () {
