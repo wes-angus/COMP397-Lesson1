@@ -9,15 +9,15 @@
     let curState: config.Scene;
 
     let assetManifest = [
-        { id: "startButton", src: "/Assets/images/startButton.png" },
-        { id: "restartButton", src: "/Assets/images/restartButton.png" },
-        { id: "plane", src: "/Assets/images/plane.png" },
-        { id: "cloud", src: "/Assets/images/cloud.png" },
-        { id: "island", src: "/Assets/images/island.png" },
-        { id: "ocean", src: "/Assets/images/ocean.gif" },
-        { id: "engineSound", src: "/Assets/audio/engine.ogg" },
-        { id: "thunderSound", src: "/Assets/audio/thunder.ogg" },
-        { id: "yaySound", src: "/Assets/audio/yay.ogg" }
+        { id: "startButton", src: "./Assets/images/startButton.png" },
+        { id: "restartButton", src: "./Assets/images/restartButton.png" },
+        { id: "plane", src: "./Assets/images/plane.png" },
+        { id: "cloud", src: "./Assets/images/cloud.png" },
+        { id: "island", src: "./Assets/images/island.png" },
+        { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "engineSound", src: "./Assets/audio/engine.ogg" },
+        { id: "thunderSound", src: "./Assets/audio/thunder.ogg" },
+        { id: "yaySound", src: "./Assets/audio/yay.ogg" }
     ];
 
     function Init(): void {
