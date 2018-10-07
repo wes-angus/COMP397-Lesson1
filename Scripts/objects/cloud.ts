@@ -17,6 +17,7 @@ module objects {
         _move(): void {
             this.y += this._verticalSpeed;
             this.x += this._horizSpeed;
+            this._updatePosition();
         }
         _checkBounds(): void {
             if (this.y > 480 + this.Height) {
@@ -30,6 +31,7 @@ module objects {
             this._horizSpeed = Math.floor(Math.random() * 4) - 2;
             this.y = -this.Height;
             this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+            this.IsColliding = false;
         }
         public Destroy(): void {
 

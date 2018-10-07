@@ -5,8 +5,17 @@ module objects {
         private _height: number;
         private _halfWidth: number;
         private _halfHeight: number;
+        private _position: util.Vector2;
+        private _isColliding: boolean;
 
         //public props
+        get IsColliding(): boolean {
+            return this._isColliding;
+        }
+        set IsColliding(newVal: boolean) {
+            this._isColliding = newVal;
+        }
+
         get Width(): number {
             return this._width;
         }
@@ -29,9 +38,17 @@ module objects {
             return this._halfWidth;
         }
 
+        get Position(): util.Vector2 {
+            return this._position;
+        }
+        set Position(newPos: util.Vector2) {
+            this._position = newPos;
+        }
+
         //constructors
-        constructor(imageId: string, isCentered: boolean) {
-            super(managers.Game.assetManager.getResult(imageId));
+        constructor(imageName: string, isCentered: boolean) {
+            super(managers.Game.assetManager.getResult(imageName));
+            this.name = imageName;
 
             this._init(isCentered);
         }
@@ -40,11 +57,18 @@ module objects {
         private _init(isCentered: boolean): void {
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;
+            this.Position = new util.Vector2(this.x, this.y);
+            this.IsColliding = false;
             
             if (isCentered) {
                 this.regX = this.HalfWidth;
                 this.regY = this.HalfHeight;
             }
+        }
+
+        protected _updatePosition(): void {
+            this.Position.x = this.x;
+            this.Position.y = this.y;
         }
 
         //public methods

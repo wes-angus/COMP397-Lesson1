@@ -26,6 +26,7 @@ var objects;
         Cloud.prototype._move = function () {
             this.y += this._verticalSpeed;
             this.x += this._horizSpeed;
+            this._updatePosition();
         };
         Cloud.prototype._checkBounds = function () {
             if (this.y > 480 + this.Height) {
@@ -38,6 +39,7 @@ var objects;
             this._horizSpeed = Math.floor(Math.random() * 4) - 2;
             this.y = -this.Height;
             this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+            this.IsColliding = false;
         };
         Cloud.prototype.Destroy = function () {
         };

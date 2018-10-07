@@ -25,6 +25,7 @@ var objects;
         //private methods
         Island.prototype._move = function () {
             this.y += this._verticalSpeed;
+            this._updatePosition();
         };
         Island.prototype._checkBounds = function () {
             if (this.y > 480 + this.Height) {
@@ -36,6 +37,7 @@ var objects;
             this._verticalSpeed = 5;
             this.y = -this.Height;
             this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+            this.IsColliding = false;
         };
         Island.prototype.Destroy = function () {
         };

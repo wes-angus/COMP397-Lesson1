@@ -2,6 +2,7 @@ module objects {
     export class Island extends objects.GameObject {
         //private inst. vars
         private _verticalSpeed: number;
+        private 
 
         //public props
 
@@ -15,6 +16,7 @@ module objects {
         //private methods
         _move(): void {
             this.y += this._verticalSpeed;
+            this._updatePosition();
         }
         _checkBounds(): void {
             if (this.y > 480 + this.Height) {
@@ -27,6 +29,7 @@ module objects {
             this._verticalSpeed = 5;
             this.y = -this.Height;
             this.x = Math.floor(Math.random() * (640 - this.Width) + this.HalfWidth);
+            this.IsColliding = false;
         }
         public Destroy(): void {
 

@@ -20,7 +20,6 @@ var scenes;
         function Level1() {
             var _this = _super.call(this) || this;
             _this._cloudNum = 3;
-            _this.collided = false;
             _this.Start();
             return _this;
         }
@@ -47,33 +46,36 @@ var scenes;
             this.Main();
         };
         Level1.prototype.Update = function () {
+            var _this = this;
             this._ocean.Update();
             this._player.Update();
             this._island.Update();
             //Update each cloud in the array
-            for (var _i = 0, _a = this._clouds; _i < _a.length; _i++) {
-                var cloud = _a[_i];
+            this._clouds.forEach(function (cloud) {
                 cloud.Update();
-            }
-            if (this._player.checkIntersection(this._island)) {
-                if (!this.collided) {
-                    this.collided = true;
+                if (!cloud.IsColliding) {
+                    if (_this._player.checkIntersection(cloud)) {
+                        cloud.IsColliding = true;
+                        console.log("Ran into a cloud :(");
+                    }
+                }
+            });
+            if (!this._island.IsColliding) {
+                if (this._player.checkIntersection(this._island)) {
+                    this._island.IsColliding = true;
                     console.log("Mail Delivered!");
                 }
             }
-            else {
-                this.collided = false;
-            }
         };
         Level1.prototype.Main = function () {
+            var _this = this;
             this.addChild(this._ocean);
             this.addChild(this._island);
             this.addChild(this._player);
             //Add each cloud in the array to the scene
-            for (var _i = 0, _a = this._clouds; _i < _a.length; _i++) {
-                var cloud = _a[_i];
-                this.addChild(cloud);
-            }
+            this._clouds.forEach(function (cloud) {
+                _this.addChild(cloud);
+            });
         };
         return Level1;
     }(objects.Scene));

@@ -16,13 +16,24 @@ var objects;
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
         //constructors
-        function GameObject(imageId, isCentered) {
-            var _this = _super.call(this, managers.Game.assetManager.getResult(imageId)) || this;
+        function GameObject(imageName, isCentered) {
+            var _this = _super.call(this, managers.Game.assetManager.getResult(imageName)) || this;
+            _this.name = imageName;
             _this._init(isCentered);
             return _this;
         }
-        Object.defineProperty(GameObject.prototype, "Width", {
+        Object.defineProperty(GameObject.prototype, "IsColliding", {
             //public props
+            get: function () {
+                return this._isColliding;
+            },
+            set: function (newVal) {
+                this._isColliding = newVal;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameObject.prototype, "Width", {
             get: function () {
                 return this._width;
             },
@@ -58,14 +69,30 @@ var objects;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GameObject.prototype, "Position", {
+            get: function () {
+                return this._position;
+            },
+            set: function (newPos) {
+                this._position = newPos;
+            },
+            enumerable: true,
+            configurable: true
+        });
         //private methods
         GameObject.prototype._init = function (isCentered) {
             this.Width = this.getBounds().width;
             this.Height = this.getBounds().height;
+            this.Position = new util.Vector2(this.x, this.y);
+            this.IsColliding = false;
             if (isCentered) {
                 this.regX = this.HalfWidth;
                 this.regY = this.HalfHeight;
             }
+        };
+        GameObject.prototype._updatePosition = function () {
+            this.Position.x = this.x;
+            this.Position.y = this.y;
         };
         return GameObject;
     }(createjs.Bitmap));

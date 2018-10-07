@@ -7,7 +7,6 @@ module scenes {
         private _island: objects.Island;
         private _clouds: objects.Cloud[];
         private _cloudNum: number = 3;
-        private collided: boolean = false;
 
         //public props
 
@@ -50,17 +49,20 @@ module scenes {
             this._player.Update();
             this._island.Update();
             //Update each cloud in the array
-            for (const cloud of this._clouds) {
+            this._clouds.forEach(cloud => {
                 cloud.Update();
-            }
-            if (this._player.checkIntersection(this._island)) {
-                if (!this.collided) {
-                    this.collided = true;
+                if (!cloud.IsColliding) {
+                    if (this._player.checkIntersection(cloud)) {
+                        cloud.IsColliding = true;
+                        console.log("Ran into a cloud :(");
+                    }
+                }
+            });
+            if (!this._island.IsColliding) {
+                if (this._player.checkIntersection(this._island)) {
+                    this._island.IsColliding = true;
                     console.log("Mail Delivered!");
                 }
-            }
-            else {
-                this.collided = false;
             }
         }
         public Main(): void {
@@ -68,9 +70,9 @@ module scenes {
             this.addChild(this._island);
             this.addChild(this._player);
             //Add each cloud in the array to the scene
-            for (const cloud of this._clouds) {
+            this._clouds.forEach(cloud => {
                 this.addChild(cloud);
-            }
+            });
         }
     }
 }
