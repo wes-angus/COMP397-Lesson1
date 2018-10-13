@@ -82,9 +82,14 @@ module objects {
                 switch (other.name) {
                     case "island":
                         sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                        managers.Game.scoreBoard.Score += 100;
                         break;
                     case "cloud":
                         sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
+                        managers.Game.scoreBoard.Lives--;
+                        if (managers.Game.scoreBoard.Lives < 1) {
+                            managers.Game.curState = config.Scene.OVER;
+                        }
                         break;
                 }
                 return true;

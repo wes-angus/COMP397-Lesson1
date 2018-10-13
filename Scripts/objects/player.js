@@ -30,7 +30,6 @@ var objects;
         Player.prototype.Destroy = function () {
         };
         Player.prototype.Start = function () {
-            createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
         };
         Player.prototype.Update = function () {
             this.x = managers.Game.stage.mouseX;

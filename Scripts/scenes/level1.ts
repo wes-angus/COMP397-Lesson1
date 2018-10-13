@@ -8,6 +8,7 @@ module scenes {
         private _clouds: objects.Cloud[];
         private _cloudNum: number = 3;
         private _scoreBoard: managers.ScoreBoard;
+        private _engineSound: createjs.AbstractSoundInstance;
 
         //public props
 
@@ -25,6 +26,7 @@ module scenes {
         }
         public Destroy(): void {
             this.removeAllChildren();
+            this._engineSound.stop();
         }
         public Start(): void {
             //TODO: Remove this hack
@@ -45,6 +47,8 @@ module scenes {
             for (let i = 0; i < this._cloudNum; i++) {
                 this._clouds.push(new objects.Cloud());
             }
+
+            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
 
             this.Main();
         }
@@ -79,6 +83,7 @@ module scenes {
             });
 
             this._scoreBoard = new managers.ScoreBoard();
+            managers.Game.scoreBoard = this._scoreBoard;
         }
     }
 }

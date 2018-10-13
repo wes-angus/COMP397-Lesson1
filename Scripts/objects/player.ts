@@ -20,7 +20,7 @@ module objects {
 
         }
         public Start(): void {
-            createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
+            
         }
         public Update(): void {
             this.x = managers.Game.stage.mouseX;

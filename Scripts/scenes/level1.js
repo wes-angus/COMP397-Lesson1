@@ -29,6 +29,7 @@ var scenes;
         };
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
+            this._engineSound.stop();
         };
         Level1.prototype.Start = function () {
             //TODO: Remove this hack
@@ -45,6 +46,7 @@ var scenes;
             for (var i = 0; i < this._cloudNum; i++) {
                 this._clouds.push(new objects.Cloud());
             }
+            this._engineSound = createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
             this.Main();
         };
         Level1.prototype.Update = function () {
@@ -79,6 +81,7 @@ var scenes;
                 _this.addChild(cloud);
             });
             this._scoreBoard = new managers.ScoreBoard();
+            managers.Game.scoreBoard = this._scoreBoard;
         };
         return Level1;
     }(objects.Scene));

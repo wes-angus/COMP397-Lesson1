@@ -5,5 +5,6 @@ module managers {
         public static stage: createjs.Stage;
         public static curState: config.Scene;
         public static curScene: objects.Scene;
+        public static scoreBoard: managers.ScoreBoard;
     }
 }

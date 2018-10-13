@@ -22,7 +22,7 @@ module scenes {
             this.removeAllChildren();
         }
         public Start(): void {
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FF0000", 320, 240, true);
             this._restartBtn = new objects.Button("restartButton", 320, 360, true);
 
             this.Main();
