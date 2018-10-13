@@ -30,18 +30,24 @@ var scenes;
             this.removeAllChildren();
         };
         Over.prototype.Start = function () {
-            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FF0000", 320, 240, true);
+            //TODO: Remove this hack
+            managers.Game.curScene = this;
+            this._ocean = new objects.Ocean();
+            this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
             this._restartBtn = new objects.Button("restartButton", 320, 360, true);
             this.Main();
         };
         Over.prototype.Update = function () {
         };
         Over.prototype.Main = function () {
+            this.addChild(this._ocean);
             this.addChild(this._gameOverLbl);
             this.addChild(this._restartBtn);
             this._restartBtn.on("click", function () {
                 managers.Game.curState = config.Scene.LEVEL1;
             });
+            this._scoreBoard = new managers.ScoreBoard(0, 0, managers.Game.highScore, true);
+            managers.Game.scoreBoard = this._scoreBoard;
         };
         return Over;
     }(objects.Scene));

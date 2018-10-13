@@ -9,13 +9,9 @@ var managers;
             if (isGameOver === void 0) { isGameOver = false; }
             this._curScene = managers.Game.curScene;
             this.Start(isGameOver);
-            if (!isGameOver) {
-                this.Lives = livesNum;
-                this.Score = scoreNum;
-            }
-            else {
-                this.HighScore = scoreNum;
-            }
+            this.Lives = livesNum;
+            this.Score = scoreNum;
+            this.HighScore = highScoreNum;
         }
         Object.defineProperty(ScoreBoard.prototype, "Score", {
             //public props
@@ -60,13 +56,9 @@ var managers;
         //private methods
         //public methods
         ScoreBoard.prototype.Start = function (isGameOver) {
-            if (!isGameOver) {
-                this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
-                this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
-            }
-            else {
-                this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 320, 240, true);
-            }
+            this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
+            this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
+            this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 320, 140, true);
             this.Main(isGameOver);
         };
         ScoreBoard.prototype.Main = function (isGameOver) {
