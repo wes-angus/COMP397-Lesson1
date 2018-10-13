@@ -8,6 +8,8 @@
     let curScene: objects.Scene;
     let curState: config.Scene;
 
+    let scoreBoard: managers.ScoreBoard;
+
     let assetManifest = [
         { id: "startButton", src: "./Assets/images/startButton.png" },
         { id: "restartButton", src: "./Assets/images/restartButton.png" },
@@ -37,6 +39,11 @@
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", Update);
 
+        //Setup global scoreboard and UI
+        scoreBoard = new managers.ScoreBoard();
+        managers.Game.scoreBoard = scoreBoard;
+
+        //Setup initial scene
         curState = config.Scene.START;
         managers.Game.curState = curState;
         Main();

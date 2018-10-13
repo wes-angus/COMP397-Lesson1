@@ -9,8 +9,6 @@ module managers {
         private _livesLabel: objects.Label;
         private _highScoreLabel: objects.Label;
 
-        private _curScene: objects.Scene;
-
         //public props
         get Score(): number {
             return this._score;
@@ -43,10 +41,8 @@ module managers {
         }
 
         //constructor
-        constructor(livesNum: number = 5, scoreNum: number = 0, highScoreNum: number = 0, isGameOver: boolean = false) {
-            this._curScene = managers.Game.curScene;
-
-            this.Start(isGameOver);
+        constructor(livesNum: number = 5, scoreNum: number = 0, highScoreNum: number = 0) {
+            this.Start();
 
             this.Lives = livesNum;
             this.Score = scoreNum;
@@ -56,21 +52,24 @@ module managers {
         //private methods
 
         //public methods
-        public Start(isGameOver: boolean): void {
+        public Reset(livesNum: number = 5, scoreNum: number = 0) {
+            this.Lives = livesNum;
+            this.Score = scoreNum;
+        }
+
+        public AddGameUI(curScene: objects.Scene): void {
+            curScene.addChild(this._scoreLabel);
+            curScene.addChild(this._livesLabel);
+        }
+
+        public AddHighScore(curScene: objects.Scene): void {
+            curScene.addChild(this._highScoreLabel);
+        }
+
+        public Start(): void {
             this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
             this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 320, 140, true);
-            this.Main(isGameOver);
-        }
-
-        public Main(isGameOver: boolean): void {
-            if (!isGameOver) {
-                managers.Game.curScene.addChild(this._scoreLabel);
-                managers.Game.curScene.addChild(this._livesLabel);
-            }
-            else {
-                managers.Game.curScene.addChild(this._highScoreLabel);
-            }
         }
     }
 }

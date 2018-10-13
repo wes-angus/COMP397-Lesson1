@@ -30,8 +30,6 @@ var scenes;
             this.removeAllChildren();
         };
         Over.prototype.Start = function () {
-            //TODO: Remove this hack
-            managers.Game.curScene = this;
             this._ocean = new objects.Ocean();
             this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
             this._restartBtn = new objects.Button("restartButton", 320, 360, true);
@@ -45,9 +43,9 @@ var scenes;
             this.addChild(this._restartBtn);
             this._restartBtn.on("click", function () {
                 managers.Game.curState = config.Scene.LEVEL1;
+                managers.Game.scoreBoard.Reset();
             });
-            this._scoreBoard = new managers.ScoreBoard(0, 0, managers.Game.highScore, true);
-            managers.Game.scoreBoard = this._scoreBoard;
+            managers.Game.scoreBoard.AddHighScore(this);
         };
         return Over;
     }(objects.Scene));

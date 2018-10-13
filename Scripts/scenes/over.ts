@@ -4,7 +4,6 @@ module scenes {
         private _ocean: objects.Ocean;
         private _gameOverLbl: objects.Label;
         private _restartBtn: objects.Button;
-        private _scoreBoard: managers.ScoreBoard;
 
         //public props
 
@@ -24,9 +23,6 @@ module scenes {
             this.removeAllChildren();
         }
         public Start(): void {
-            //TODO: Remove this hack
-            managers.Game.curScene = this;
-
             this._ocean = new objects.Ocean();
             this._gameOverLbl = new objects.Label("Game Over", "60px", "Consolas", "#FFFF00", 320, 240, true);
             this._restartBtn = new objects.Button("restartButton", 320, 360, true);
@@ -42,10 +38,10 @@ module scenes {
             
             this._restartBtn.on("click", () => {
                 managers.Game.curState = config.Scene.LEVEL1;
+                managers.Game.scoreBoard.Reset();
             });
 
-            this._scoreBoard = new managers.ScoreBoard(0, 0, managers.Game.highScore, true);
-            managers.Game.scoreBoard = this._scoreBoard;
+            managers.Game.scoreBoard.AddHighScore(this);
         }
     }
 }

@@ -2,13 +2,11 @@ var managers;
 (function (managers) {
     var ScoreBoard = /** @class */ (function () {
         //constructor
-        function ScoreBoard(livesNum, scoreNum, highScoreNum, isGameOver) {
+        function ScoreBoard(livesNum, scoreNum, highScoreNum) {
             if (livesNum === void 0) { livesNum = 5; }
             if (scoreNum === void 0) { scoreNum = 0; }
             if (highScoreNum === void 0) { highScoreNum = 0; }
-            if (isGameOver === void 0) { isGameOver = false; }
-            this._curScene = managers.Game.curScene;
-            this.Start(isGameOver);
+            this.Start();
             this.Lives = livesNum;
             this.Score = scoreNum;
             this.HighScore = highScoreNum;
@@ -55,20 +53,23 @@ var managers;
         });
         //private methods
         //public methods
-        ScoreBoard.prototype.Start = function (isGameOver) {
+        ScoreBoard.prototype.Reset = function (livesNum, scoreNum) {
+            if (livesNum === void 0) { livesNum = 5; }
+            if (scoreNum === void 0) { scoreNum = 0; }
+            this.Lives = livesNum;
+            this.Score = scoreNum;
+        };
+        ScoreBoard.prototype.AddGameUI = function (curScene) {
+            curScene.addChild(this._scoreLabel);
+            curScene.addChild(this._livesLabel);
+        };
+        ScoreBoard.prototype.AddHighScore = function (curScene) {
+            curScene.addChild(this._highScoreLabel);
+        };
+        ScoreBoard.prototype.Start = function () {
             this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
             this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
             this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 320, 140, true);
-            this.Main(isGameOver);
-        };
-        ScoreBoard.prototype.Main = function (isGameOver) {
-            if (!isGameOver) {
-                managers.Game.curScene.addChild(this._scoreLabel);
-                managers.Game.curScene.addChild(this._livesLabel);
-            }
-            else {
-                managers.Game.curScene.addChild(this._highScoreLabel);
-            }
         };
         return ScoreBoard;
     }());

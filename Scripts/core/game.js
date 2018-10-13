@@ -6,6 +6,7 @@
     var assetManager;
     var curScene;
     var curState;
+    var scoreBoard;
     var assetManifest = [
         { id: "startButton", src: "./Assets/images/startButton.png" },
         { id: "restartButton", src: "./Assets/images/restartButton.png" },
@@ -32,6 +33,10 @@
         stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", Update);
+        //Setup global scoreboard and UI
+        scoreBoard = new managers.ScoreBoard();
+        managers.Game.scoreBoard = scoreBoard;
+        //Setup initial scene
         curState = config.Scene.START;
         managers.Game.curState = curState;
         Main();

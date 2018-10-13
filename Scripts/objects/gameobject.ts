@@ -84,8 +84,8 @@ module objects {
                         sound = createjs.Sound.play("yaySound", { volume: 0.1 });
                         managers.Game.scoreBoard.Score += 100;
 
-                        if (managers.Game.scoreBoard.Score > managers.Game.highScore) {
-                            managers.Game.highScore = managers.Game.scoreBoard.Score;
+                        if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
+                            managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
                         }
                         break;
                     case "cloud":

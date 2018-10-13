@@ -32,8 +32,6 @@ var scenes;
             this._engineSound.stop();
         };
         Level1.prototype.Start = function () {
-            //TODO: Remove this hack
-            managers.Game.curScene = this;
             //Ocean background
             this._ocean = new objects.Ocean();
             //Player object
@@ -80,8 +78,7 @@ var scenes;
             this._clouds.forEach(function (cloud) {
                 _this.addChild(cloud);
             });
-            this._scoreBoard = new managers.ScoreBoard();
-            managers.Game.scoreBoard = this._scoreBoard;
+            managers.Game.scoreBoard.AddGameUI(this);
         };
         return Level1;
     }(objects.Scene));

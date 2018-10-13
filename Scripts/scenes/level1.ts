@@ -7,7 +7,6 @@ module scenes {
         private _island: objects.Island;
         private _clouds: objects.Cloud[];
         private _cloudNum: number = 3;
-        private _scoreBoard: managers.ScoreBoard;
         private _engineSound: createjs.AbstractSoundInstance;
 
         //public props
@@ -29,9 +28,6 @@ module scenes {
             this._engineSound.stop();
         }
         public Start(): void {
-            //TODO: Remove this hack
-            managers.Game.curScene = this;
-
             //Ocean background
             this._ocean = new objects.Ocean();
 
@@ -82,8 +78,7 @@ module scenes {
                 this.addChild(cloud);
             });
 
-            this._scoreBoard = new managers.ScoreBoard();
-            managers.Game.scoreBoard = this._scoreBoard;
+            managers.Game.scoreBoard.AddGameUI(this);
         }
     }
 }
