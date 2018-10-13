@@ -7,6 +7,7 @@ module scenes {
         private _island: objects.Island;
         private _clouds: objects.Cloud[];
         private _cloudNum: number = 3;
+        private _scoreBoard: managers.ScoreBoard;
 
         //public props
 
@@ -26,6 +27,9 @@ module scenes {
             this.removeAllChildren();
         }
         public Start(): void {
+            //TODO: Remove this hack
+            managers.Game.curScene = this;
+
             //Ocean background
             this._ocean = new objects.Ocean();
 
@@ -73,6 +77,8 @@ module scenes {
             this._clouds.forEach(cloud => {
                 this.addChild(cloud);
             });
+
+            this._scoreBoard = new managers.ScoreBoard();
         }
     }
 }

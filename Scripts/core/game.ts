@@ -70,6 +70,7 @@
                 curScene = new scenes.Over();
                 break;
         }
+        
         stage.addChild(curScene);
     }
 

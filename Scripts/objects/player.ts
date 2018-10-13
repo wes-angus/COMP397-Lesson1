@@ -20,7 +20,7 @@ module objects {
 
         }
         public Start(): void {
-
+            createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
         }
         public Update(): void {
             this.x = managers.Game.stage.mouseX;
@@ -33,27 +33,6 @@ module objects {
             }
 
             this._updatePosition();
-        }
-
-        //Assumes both objects are centered
-        public checkIntersection(other: GameObject): boolean {
-            if (this.x - this.HalfWidth < other.x + other.Width &&
-                this.x + this.HalfWidth > other.x &&
-                this.y - this.HalfHeight < other.y + other.Height &&
-                this.y + this.HalfHeight > other.y) {
-                    switch(other.name) {
-                        case "island":
-                        createjs.Sound.play("yaySound");
-                        console.log("yaySound.play");
-                        break;
-                        case "cloud":
-                        createjs.Sound.play("thunderSound");
-                        console.log("thunderSound.play")
-                        break;
-                    }
-                    return true;
-            }
-            return false;
         }
     }
 }

@@ -59,7 +59,7 @@ module objects {
             this.Height = this.getBounds().height;
             this.Position = new util.Vector2(this.x, this.y);
             this.IsColliding = false;
-            
+
             if (isCentered) {
                 this.regX = this.HalfWidth;
                 this.regY = this.HalfHeight;
@@ -69,6 +69,27 @@ module objects {
         protected _updatePosition(): void {
             this.Position.x = this.x;
             this.Position.y = this.y;
+        }
+
+        //Assumes other object is not centered
+        public checkIntersection(other: GameObject): boolean {
+            if (this.x - this.HalfWidth < other.x + other.Width &&
+                this.x + this.HalfWidth > other.x &&
+                this.y - this.HalfHeight < other.y + other.Height &&
+                this.y + this.HalfHeight > other.y) {
+                let sound: createjs.AbstractSoundInstance;
+
+                switch (other.name) {
+                    case "island":
+                        sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                        break;
+                    case "cloud":
+                        sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
+                        break;
+                }
+                return true;
+            }
+            return false;
         }
 
         //public methods

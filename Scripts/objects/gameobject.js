@@ -94,6 +94,25 @@ var objects;
             this.Position.x = this.x;
             this.Position.y = this.y;
         };
+        //Assumes other object is not centered
+        GameObject.prototype.checkIntersection = function (other) {
+            if (this.x - this.HalfWidth < other.x + other.Width &&
+                this.x + this.HalfWidth > other.x &&
+                this.y - this.HalfHeight < other.y + other.Height &&
+                this.y + this.HalfHeight > other.y) {
+                var sound = void 0;
+                switch (other.name) {
+                    case "island":
+                        sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                        break;
+                    case "cloud":
+                        sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
+                        break;
+                }
+                return true;
+            }
+            return false;
+        };
         return GameObject;
     }(createjs.Bitmap));
     objects.GameObject = GameObject;

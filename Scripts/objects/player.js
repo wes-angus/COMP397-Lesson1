@@ -30,6 +30,7 @@ var objects;
         Player.prototype.Destroy = function () {
         };
         Player.prototype.Start = function () {
+            createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
         };
         Player.prototype.Update = function () {
             this.x = managers.Game.stage.mouseX;
@@ -40,26 +41,6 @@ var objects;
                 this.x = this.HalfWidth;
             }
             this._updatePosition();
-        };
-        //Assumes both objects are centered
-        Player.prototype.checkIntersection = function (other) {
-            if (this.x - this.HalfWidth < other.x + other.Width &&
-                this.x + this.HalfWidth > other.x &&
-                this.y - this.HalfHeight < other.y + other.Height &&
-                this.y + this.HalfHeight > other.y) {
-                switch (other.name) {
-                    case "island":
-                        createjs.Sound.play("yaySound");
-                        console.log("yaySound.play");
-                        break;
-                    case "cloud":
-                        createjs.Sound.play("thunderSound");
-                        console.log("thunderSound.play");
-                        break;
-                }
-                return true;
-            }
-            return false;
         };
         return Player;
     }(objects.GameObject));
