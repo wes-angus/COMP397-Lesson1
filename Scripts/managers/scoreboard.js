@@ -19,12 +19,6 @@ var managers;
             set: function (newVal) {
                 this._score = newVal;
                 this._scoreLabel.text = "Score: " + this._score;
-                /*
-                if(this._score > this._highScore)
-                {
-                    this.HighScore = this._score;
-                }
-                */
             },
             enumerable: true,
             configurable: true
@@ -67,8 +61,8 @@ var managers;
             curScene.addChild(this._highScoreLabel);
         };
         ScoreBoard.prototype.Start = function () {
-            this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 350, 10, false);
-            this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 20, 10, false);
+            this._scoreLabel = new objects.Label("Score: 99999", "30px", "Consolas", "#FFFF00", 430, 10, false);
+            this._livesLabel = new objects.Label("Lives: 99", "30px", "Consolas", "#FFFF00", 80, 10, false);
             this._highScoreLabel = new objects.Label("High Score: 999999", "60px", "Consolas", "#FFFF00", 320, 140, true);
         };
         return ScoreBoard;

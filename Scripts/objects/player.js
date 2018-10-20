@@ -16,10 +16,21 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //constructors
-        function Player(y) {
+        function Player(x, y) {
+            if (x === void 0) { x = 45; }
             if (y === void 0) { y = 435; }
             var _this = _super.call(this, "plane", true) || this;
-            _this.y = y;
+            if (managers.Game.curState === config.Scene.LEVEL2) {
+                _this.x = x;
+                _this.rotation = 90;
+            }
+            else if (managers.Game.curState === config.Scene.LEVEL3) {
+                _this.x = 640 - x;
+                _this.rotation = 270;
+            }
+            else {
+                _this.y = y;
+            }
             _this.Start();
             return _this;
         }
@@ -32,12 +43,23 @@ var objects;
         Player.prototype.Start = function () {
         };
         Player.prototype.Update = function () {
-            this.x = managers.Game.stage.mouseX;
-            if (this.x > 640 - this.HalfWidth) {
-                this.x = 640 - this.HalfWidth;
+            if (managers.Game.curState === config.Scene.LEVEL2 || managers.Game.curState === config.Scene.LEVEL3) {
+                this.y = managers.Game.stage.mouseY;
+                if (this.y > 480 - this.HalfHeight) {
+                    this.y = 480 - this.HalfHeight;
+                }
+                else if (this.y < this.HalfHeight) {
+                    this.y = this.HalfHeight;
+                }
             }
-            else if (this.x < this.HalfWidth) {
-                this.x = this.HalfWidth;
+            else {
+                this.x = managers.Game.stage.mouseX;
+                if (this.x > 640 - this.HalfWidth) {
+                    this.x = 640 - this.HalfWidth;
+                }
+                else if (this.x < this.HalfWidth) {
+                    this.x = this.HalfWidth;
+                }
             }
             this._updatePosition();
         };

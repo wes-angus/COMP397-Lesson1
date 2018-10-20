@@ -43,6 +43,7 @@ var scenes;
             this.addChild(this._welcomeLbl);
             this.addChild(this._startBtn);
             this._startBtn.on("click", function () {
+                //TODO: Change back to 1
                 managers.Game.curState = config.Scene.LEVEL1;
             });
         };

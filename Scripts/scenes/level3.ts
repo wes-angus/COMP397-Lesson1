@@ -1,12 +1,12 @@
 module scenes {
-    export class Level1 extends objects.Scene {
+    export class Level3 extends objects.Scene {
         //private inst. vars
         //Game objects
         private _player: objects.Player;
         private _ocean: objects.Ocean;
         private _island: objects.Island;
         private _clouds: objects.Cloud[];
-        private _cloudNum: number = 1;
+        private _cloudNum: number = 3;
         private _engineSound: createjs.AbstractSoundInstance;
 
         //public props

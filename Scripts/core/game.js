@@ -14,6 +14,7 @@
         { id: "cloud", src: "./Assets/images/cloud.png" },
         { id: "island", src: "./Assets/images/island.png" },
         { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "ocean_h", src: "./Assets/images/ocean_h.gif" },
         { id: "engineSound", src: "./Assets/audio/engine.ogg" },
         { id: "thunderSound", src: "./Assets/audio/thunder.ogg" },
         { id: "yaySound", src: "./Assets/audio/yay.ogg" }
@@ -61,6 +62,12 @@
                 break;
             case config.Scene.LEVEL1:
                 curScene = new scenes.Level1();
+                break;
+            case config.Scene.LEVEL2:
+                curScene = new scenes.Level2();
+                break;
+            case config.Scene.LEVEL3:
+                curScene = new scenes.Level3();
                 break;
             case config.Scene.OVER:
                 curScene = new scenes.Over();

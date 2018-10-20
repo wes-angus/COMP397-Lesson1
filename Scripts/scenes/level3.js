@@ -13,25 +13,25 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var scenes;
 (function (scenes) {
-    var Level1 = /** @class */ (function (_super) {
-        __extends(Level1, _super);
+    var Level3 = /** @class */ (function (_super) {
+        __extends(Level3, _super);
         //public props
         //constructor
-        function Level1() {
+        function Level3() {
             var _this = _super.call(this) || this;
-            _this._cloudNum = 1;
+            _this._cloudNum = 3;
             _this.Start();
             return _this;
         }
         //private methods
         //public methods
-        Level1.prototype.Reset = function () {
+        Level3.prototype.Reset = function () {
         };
-        Level1.prototype.Destroy = function () {
+        Level3.prototype.Destroy = function () {
             this.removeAllChildren();
             this._engineSound.stop();
         };
-        Level1.prototype.Start = function () {
+        Level3.prototype.Start = function () {
             //Ocean background
             this._ocean = new objects.Ocean();
             //Player object
@@ -47,7 +47,7 @@ var scenes;
             this._engineSound = createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
             this.Main();
         };
-        Level1.prototype.Update = function () {
+        Level3.prototype.Update = function () {
             var _this = this;
             this._ocean.Update();
             this._player.Update();
@@ -67,7 +67,7 @@ var scenes;
                 }
             }
         };
-        Level1.prototype.Main = function () {
+        Level3.prototype.Main = function () {
             var _this = this;
             this.addChild(this._ocean);
             this.addChild(this._island);
@@ -78,8 +78,8 @@ var scenes;
             });
             managers.Game.scoreBoard.AddGameUI(this);
         };
-        return Level1;
+        return Level3;
     }(objects.Scene));
-    scenes.Level1 = Level1;
+    scenes.Level3 = Level3;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=level1.js.map
+//# sourceMappingURL=level3.js.map

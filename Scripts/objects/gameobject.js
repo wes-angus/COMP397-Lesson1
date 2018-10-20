@@ -105,6 +105,18 @@ var objects;
                     case "island":
                         sound = createjs.Sound.play("yaySound", { volume: 0.1 });
                         managers.Game.scoreBoard.Score += 100;
+                        //Transition between levels
+                        if (managers.Game.curState === config.Scene.LEVEL1) {
+                            if (managers.Game.scoreBoard.Score > 499) {
+                                managers.Game.curState = config.Scene.LEVEL2;
+                            }
+                        }
+                        else if (managers.Game.curState === config.Scene.LEVEL2) {
+                            if (managers.Game.scoreBoard.Score > 999) {
+                                managers.Game.curState = config.Scene.LEVEL3;
+                            }
+                        }
+                        //Update High Score
                         if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
                             managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
                         }
