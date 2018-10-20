@@ -24,6 +24,19 @@ module util {
         }
 
         /**
+         *
+         *
+         * @static
+         * @param {util.Vector2} vec1
+         * @param {util.Vector2} vec2
+         * @returns {number}
+         * @memberof Vector2
+         */
+        public static ManhatDist(vec1: util.Vector2, vec2: util.Vector2): number {
+            return Math.abs(vec1.x - vec2.x) + Math.abs(vec1.y - vec2.y);
+        }
+
+        /**
          * Adds 2 vectors
          *
          * @static

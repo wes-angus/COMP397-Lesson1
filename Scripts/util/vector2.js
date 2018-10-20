@@ -37,6 +37,18 @@ var util;
             return Math.floor(Math.sqrt(Math.pow(vec2.x - vec1.x, 2) + Math.pow(vec2.y - vec1.y, 2)));
         };
         /**
+         *
+         *
+         * @static
+         * @param {util.Vector2} vec1
+         * @param {util.Vector2} vec2
+         * @returns {number}
+         * @memberof Vector2
+         */
+        Vector2.ManhatDist = function (vec1, vec2) {
+            return Math.abs(vec1.x - vec2.x) + Math.abs(vec1.y - vec2.y);
+        };
+        /**
          * Adds 2 vectors
          *
          * @static

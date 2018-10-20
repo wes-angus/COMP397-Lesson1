@@ -35,7 +35,7 @@ var objects;
         };
         Ocean.prototype._checkBounds = function () {
             if (managers.Game.curState === config.Scene.LEVEL2) {
-                if (this.x <= -800) {
+                if (this.x <= -1440) {
                     this.Reset();
                 }
             }
@@ -56,7 +56,7 @@ var objects;
                 this.x = 0;
             }
             else if (managers.Game.curState === config.Scene.LEVEL3) {
-                this.x = -800;
+                this.x = -1440;
             }
             else {
                 this.y = -960;
