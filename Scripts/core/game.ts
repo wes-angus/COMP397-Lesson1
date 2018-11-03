@@ -19,7 +19,13 @@
         { id: "ocean", src: "./Assets/images/ocean.gif" },
         { id: "engineSound", src: "./Assets/audio/engine.ogg" },
         { id: "thunderSound", src: "./Assets/audio/thunder.ogg" },
-        { id: "yaySound", src: "./Assets/audio/yay.ogg" }
+        { id: "yaySound", src: "./Assets/audio/yay.ogg" },
+        { id: "bullet", src: "./Assets/images/bullet.png" },
+        { id: "enemy", src: "./Assets/images/enemy1.png" },
+        { id: "bulletSound", src: "./Assets/audio/bullet.mp3" },
+        { id: "explodeSound", src: "./Assets/audio/explosion.mp3" },
+        { id: "coinSound", src: "./Assets/audio/coin.wav" },
+        { id: "lifeSound", src: "./Assets/audio/life.wav" }
     ];
 
     function Init(): void {

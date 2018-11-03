@@ -91,17 +91,22 @@ module objects {
                     case "cloud":
                         sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
                         managers.Game.scoreBoard.Lives--;
-                        if (managers.Game.scoreBoard.Lives < 1) {
-                            managers.Game.curState = config.Scene.OVER;
-                        }
                         break;
+                    case "enemy":
+                        let explodeSound = createjs.Sound.play("explodeSound", { volume: 0.1 });
+                        managers.Game.scoreBoard.Lives--;
+                        break;
+                }
+
+                if (managers.Game.scoreBoard.Lives < 1) {
+                    managers.Game.curState = config.Scene.OVER;
                 }
                 return true;
             }
             return false;
         }
 
-        public Check(object2: objects.GameObject): void {
+        public checkCollision(object2: objects.GameObject): void {
             if (!object2.IsColliding) {
                 let distance = util.Vector2.Dist(this.Position, object2.Position);
                 let totalHeight = this.HalfHeight + object2.HalfHeight;
@@ -119,15 +124,20 @@ module objects {
                         case "cloud":
                             let thunderSound = createjs.Sound.play("thunderSound");
                             thunderSound.volume = 0.1;
-                            managers.Game.scoreBoard.Lives -= 1;
-
-                            if (managers.Game.scoreBoard.Lives <= 0) {
-                                managers.Game.curState = config.Scene.OVER;
-                                if (managers.Game.scoreBoard.HighScore <= managers.Game.scoreBoard.Score) {
-                                    managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
-                                }
-                            }
+                            managers.Game.scoreBoard.Lives--;
                             break;
+                        case "enemy":
+                            let explodeSound = createjs.Sound.play("explodeSound");
+                            explodeSound.volume = 0.1;
+                            managers.Game.scoreBoard.Lives--;
+                            break;
+                    }
+
+                    if (managers.Game.scoreBoard.Lives < 1) {
+                        managers.Game.curState = config.Scene.OVER;
+                        if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
+                            managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
+                        }
                     }
                 }
             }
@@ -138,10 +148,10 @@ module objects {
         //public methods
         public abstract Reset(): void;
 
-        public abstract Destroy(): void;
-
         public abstract Start(): void;
 
         public abstract Update(): void;
+
+        public abstract Destroy(): void;
     }
 }

@@ -74,6 +74,34 @@ var util;
         Vector2.Mult = function (vec1, factor) {
             return new util.Vector2(vec1.x * factor, vec1.y * factor);
         };
+        /**
+         * Divides a vector by a number
+         *
+         * @static
+         * @param {util.Vector2} vec1
+         * @param {number} factor
+         * @returns {util.Vector2}
+         * @memberof Vector2
+         */
+        Vector2.Div = function (vec1, factor) {
+            return new util.Vector2(vec1.x / factor, vec1.y / factor);
+        };
+        // Convenience Methods
+        Vector2.up = function () {
+            return new Vector2(0, -1);
+        };
+        Vector2.down = function () {
+            return new Vector2(0, 1);
+        };
+        Vector2.right = function () {
+            return new Vector2(1, 0);
+        };
+        Vector2.left = function () {
+            return new Vector2(-1, 0);
+        };
+        Vector2.zero = function () {
+            return new Vector2();
+        };
         return Vector2;
     }(createjs.Point));
     util.Vector2 = Vector2;

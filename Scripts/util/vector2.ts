@@ -64,6 +64,42 @@ module util {
             return new util.Vector2(vec1.x * factor, vec1.y * factor);
         }
 
+        /**
+         * Divides a vector by a number
+         *
+         * @static
+         * @param {util.Vector2} vec1
+         * @param {number} factor
+         * @returns {util.Vector2}
+         * @memberof Vector2
+         */
+        public static Div(vec1: util.Vector2, factor: number): util.Vector2 {
+            return new util.Vector2(vec1.x / factor, vec1.y / factor);
+        }
+
+
+        // Convenience Methods
+
+        public static up(): util.Vector2 {
+            return new Vector2(0, -1);
+        }
+
+        public static down(): util.Vector2 {
+            return new Vector2(0, 1);
+        }
+
+        public static right(): util.Vector2 {
+            return new Vector2(1, 0);
+        }
+
+        public static left(): util.Vector2 {
+            return new Vector2(-1, 0);
+        }
+
+        public static zero(): util.Vector2 {
+            return new Vector2();
+        }
+
         //private methods
     }
 }

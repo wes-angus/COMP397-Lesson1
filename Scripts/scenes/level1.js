@@ -38,6 +38,8 @@ var scenes;
             this._player = new objects.Player();
             //Island object
             this._island = new objects.Island();
+            //Enemy object
+            this._enemy = new objects.Enemy();
             //Create Cloud array
             this._clouds = new Array();
             //Fill Cloud array with clouds
@@ -52,21 +54,19 @@ var scenes;
             this._ocean.Update();
             this._player.Update();
             this._island.Update();
+            this._enemy.Update();
             //Update each cloud in the array
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
                 if (!cloud.IsColliding) {
-                    if (_this._player.checkIntersection(cloud)) {
-                        cloud.IsColliding = true;
-                        console.log("Ran into a cloud :(");
-                    }
+                    _this._player.checkCollision(cloud);
                 }
             });
             if (!this._island.IsColliding) {
-                if (this._player.checkIntersection(this._island)) {
-                    this._island.IsColliding = true;
-                    console.log("Mail Delivered!");
-                }
+                this._player.checkCollision(this._island);
+            }
+            if (!this._enemy.IsColliding) {
+                this._player.checkCollision(this._enemy);
             }
         };
         Level1.prototype.Main = function () {
@@ -74,6 +74,7 @@ var scenes;
             this.addChild(this._ocean);
             this.addChild(this._island);
             this.addChild(this._player);
+            this.addChild(this._enemy);
             //Add each cloud in the array to the scene
             this._clouds.forEach(function (cloud) {
                 _this.addChild(cloud);
