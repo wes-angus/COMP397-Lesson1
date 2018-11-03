@@ -40,14 +40,14 @@ var objects;
                 if (!this._inPlay) {
                     this.Reset();
                 }
+                this._vel = util.Vector2.Mult(this.Direction, this._speed);
             },
             enumerable: true,
             configurable: true
         });
         //private methods
         Bullet.prototype._move = function () {
-            this.y += util.Vector2.Mult(this.Direction, this._speed).y;
-            this._updatePosition();
+            this.Position = util.Vector2.Add(this.Position, this._vel);
         };
         Bullet.prototype._checkBounds = function () {
             if (this.Position.y < 480 || this.Position.y < 0) {

@@ -4,6 +4,7 @@ module objects {
         private _speed: number;
         private _direction: util.Vector2;
         private _inPlay: boolean;
+        private _vel: util.Vector2;
 
         //public props
         get Direction(): util.Vector2 {
@@ -21,6 +22,7 @@ module objects {
             if (!this._inPlay) {
                 this.Reset();
             }
+            this._vel = util.Vector2.Mult(this.Direction, this._speed);
         }
 
         constructor() {
@@ -31,8 +33,7 @@ module objects {
 
         //private methods
         _move(): void {
-            this.y += util.Vector2.Mult(this.Direction, this._speed).y;
-            this._updatePosition();
+            this.Position = util.Vector2.Add(this.Position, this._vel);
         }
         _checkBounds(): void {
             if (this.Position.y < 480 || this.Position.y < 0) {

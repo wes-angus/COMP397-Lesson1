@@ -73,8 +73,14 @@ var scenes;
             var _this = this;
             this.addChild(this._ocean);
             this.addChild(this._island);
-            this.addChild(this._player);
             this.addChild(this._enemy);
+            this.addChild(this._player);
+            /*
+            //Add each bullet in the array to the scene
+            this._bullets.forEach(bullet => {
+                this.addChild(bullet);
+            });
+            */
             //Add each cloud in the array to the scene
             this._clouds.forEach(function (cloud) {
                 _this.addChild(cloud);

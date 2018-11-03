@@ -9,7 +9,7 @@ module scenes {
         private _cloudNum: number = 3;
         private _enemy: objects.Enemy;
         private _engineSound: createjs.AbstractSoundInstance;
-
+        
         //public props
 
         //constructor
@@ -74,8 +74,14 @@ module scenes {
         public Main(): void {
             this.addChild(this._ocean);
             this.addChild(this._island);
-            this.addChild(this._player);
             this.addChild(this._enemy);
+            this.addChild(this._player);
+            /*
+            //Add each bullet in the array to the scene
+            this._bullets.forEach(bullet => {
+                this.addChild(bullet);
+            });
+            */
             //Add each cloud in the array to the scene
             this._clouds.forEach(cloud => {
                 this.addChild(cloud);
