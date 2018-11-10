@@ -33,7 +33,7 @@ module util {
          * @memberof Vector2
          */
         public static Add(vec1: util.Vector2, vec2: util.Vector2): util.Vector2 {
-            let result: util.Vector2 = new util.Vector2(vec1.x + vec2.x, vec1.y - vec2.y);
+            let result: util.Vector2 = new util.Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
             return result;
         }
 

@@ -2,8 +2,9 @@ var managers;
 (function (managers) {
     var Bullet = /** @class */ (function () {
         //constructor
-        function Bullet() {
-            this._currentBulletIndex = 0;
+        function Bullet(bulletNum) {
+            if (bulletNum === void 0) { bulletNum = 100; }
+            this._bulletNum = bulletNum;
             this.Start();
         }
         Object.defineProperty(Bullet.prototype, "Bullets", {
@@ -32,7 +33,7 @@ var managers;
                 return this._bullets[this._currentBulletIndex];
             },
             set: function (newBullet) {
-                this.CurrentBullet = newBullet;
+                this._bullets[this._currentBulletIndex] = newBullet;
             },
             enumerable: true,
             configurable: true
@@ -46,23 +47,25 @@ var managers;
             for (var i = 0; i < this._bulletNum; i++) {
                 this._bullets.push(new objects.Bullet());
             }
-            //set the current bullet to the first bullet in the array
-            this.CurrentBullet = this._bullets[this._currentBulletIndex];
+            this._currentBulletIndex = 0;
         };
         Bullet.prototype.Update = function () {
             this._bullets.forEach(function (bullet) {
                 bullet.Update();
             });
         };
+        Bullet.prototype.Destroy = function () {
+        };
         Bullet.prototype.FireBullet = function (spawnPoint, dir) {
             this.CurrentBullet.Position = spawnPoint;
+            this.CurrentBullet.x = spawnPoint.x;
+            this.CurrentBullet.y = spawnPoint.y;
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
             this._currentBulletIndex++;
             if (this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;
             }
-            this.CurrentBullet = this.Bullets[this._currentBulletIndex];
         };
         return Bullet;
     }());

@@ -16,7 +16,7 @@ var objects;
     var Bullet = /** @class */ (function (_super) {
         __extends(Bullet, _super);
         function Bullet() {
-            var _this = _super.call(this, "bullet", false) || this;
+            var _this = _super.call(this, "bullet", true) || this;
             _this.Start();
             return _this;
         }
@@ -41,16 +41,21 @@ var objects;
                     this.Reset();
                 }
                 this._vel = util.Vector2.Mult(this.Direction, this._speed);
+                console.log("vel: ", this._vel);
             },
             enumerable: true,
             configurable: true
         });
         //private methods
         Bullet.prototype._move = function () {
+            this._updatePosition();
             this.Position = util.Vector2.Add(this.Position, this._vel);
+            this.x = this.Position.x;
+            this.y = this.Position.y;
         };
         Bullet.prototype._checkBounds = function () {
-            if (this.Position.y < 480 || this.Position.y < 0) {
+            if (this.Position.y > 480 || this.Position.y < 0) {
+                this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }
         };

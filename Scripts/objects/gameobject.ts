@@ -71,39 +71,60 @@ module objects {
             this.Position.y = this.y;
         }
 
+        private resolveCollision(other: GameObject): void {
+            other.IsColliding = true;
+            let sound: createjs.AbstractSoundInstance;
+
+            switch (other.name) {
+                case "island":
+                    sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                    managers.Game.scoreBoard.Score += 100;
+                    break;
+                case "cloud":
+                    sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
+                    managers.Game.scoreBoard.Lives--;
+                    break;
+                case "enemy":
+                    sound = createjs.Sound.play("explodeSound", { volume: 0.1 });
+                    managers.Game.scoreBoard.Lives--;
+                    break;
+                case "bullet":
+                    sound = createjs.Sound.play("explodeSound");
+                    sound.volume = 0.1;
+                    managers.Game.scoreBoard.Lives--;
+                    (<Bullet>other).IsInPlay = false;
+                    break;
+            }
+
+            if (managers.Game.scoreBoard.Lives < 1) {
+                managers.Game.curState = config.Scene.OVER;
+                if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
+                    managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
+                }
+            }
+        }
+
         //Assumes other object is not centered
         public checkIntersection(other: GameObject): boolean {
             if (this.x - this.HalfWidth < other.x + other.Width &&
                 this.x + this.HalfWidth > other.x &&
                 this.y - this.HalfHeight < other.y + other.Height &&
                 this.y + this.HalfHeight > other.y) {
-                let sound: createjs.AbstractSoundInstance;
-
-                switch (other.name) {
-                    case "island":
-                        sound = createjs.Sound.play("yaySound", { volume: 0.1 });
-                        managers.Game.scoreBoard.Score += 100;
-
-                        if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
-                            managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
-                        }
-                        break;
-                    case "cloud":
-                        sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
-                        managers.Game.scoreBoard.Lives--;
-                        break;
-                    case "enemy":
-                        let explodeSound = createjs.Sound.play("explodeSound", { volume: 0.1 });
-                        managers.Game.scoreBoard.Lives--;
-                        break;
-                }
-
-                if (managers.Game.scoreBoard.Lives < 1) {
-                    managers.Game.curState = config.Scene.OVER;
-                }
+                this.resolveCollision(other);
                 return true;
             }
             return false;
+        }
+        //Assumes other object is not centered
+        public checkIntersectionNotCentered(other: GameObject): void {
+            if (!other.IsColliding) {
+                if (this.x - this.HalfWidth < other.x + other.Width &&
+                    this.x + this.HalfWidth > other.x &&
+                    this.y - this.HalfHeight < other.y + other.Height &&
+                    this.y + this.HalfHeight > other.y) {
+                    this.resolveCollision(other);
+                }
+            }
         }
 
         public checkCollision(object2: objects.GameObject): void {
@@ -113,32 +134,7 @@ module objects {
 
                 // check if this object is colliding with object 2
                 if (distance < totalHeight) {
-                    object2.IsColliding = true;
-
-                    switch (object2.name) {
-                        case "island":
-                            let yaySound = createjs.Sound.play("yaySound");
-                            yaySound.volume = 0.1;
-                            managers.Game.scoreBoard.Score += 100;
-                            break;
-                        case "cloud":
-                            let thunderSound = createjs.Sound.play("thunderSound");
-                            thunderSound.volume = 0.1;
-                            managers.Game.scoreBoard.Lives--;
-                            break;
-                        case "enemy":
-                            let explodeSound = createjs.Sound.play("explodeSound");
-                            explodeSound.volume = 0.1;
-                            managers.Game.scoreBoard.Lives--;
-                            break;
-                    }
-
-                    if (managers.Game.scoreBoard.Lives < 1) {
-                        managers.Game.curState = config.Scene.OVER;
-                        if (managers.Game.scoreBoard.Score > managers.Game.scoreBoard.HighScore) {
-                            managers.Game.scoreBoard.HighScore = managers.Game.scoreBoard.Score;
-                        }
-                    }
+                    this.resolveCollision(object2);
                 }
             }
 

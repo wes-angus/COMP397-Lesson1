@@ -30,6 +30,7 @@ var scenes;
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
             this._engineSound.stop();
+            //TODO: Clean up bullet mananger
         };
         Level1.prototype.Start = function () {
             //Ocean background
@@ -47,6 +48,9 @@ var scenes;
                 this._clouds.push(new objects.Cloud());
             }
             this._engineSound = createjs.Sound.play("engineSound", { volume: 0.1, loop: -1 });
+            //Instantiate new bullet manager
+            this._bulletManager = new managers.Bullet();
+            managers.Game.bulletManager = this._bulletManager;
             this.Main();
         };
         Level1.prototype.Update = function () {
@@ -59,15 +63,21 @@ var scenes;
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
                 if (!cloud.IsColliding) {
-                    _this._player.checkCollision(cloud);
+                    _this._player.checkIntersection(cloud);
                 }
             });
             if (!this._island.IsColliding) {
-                this._player.checkCollision(this._island);
+                this._player.checkIntersection(this._island);
             }
             if (!this._enemy.IsColliding) {
-                this._player.checkCollision(this._enemy);
+                this._player.checkIntersection(this._enemy);
             }
+            this._bulletManager.Update();
+            this._bulletManager.Bullets.forEach(function (bullet) {
+                if (bullet.IsInPlay) {
+                    _this._player.checkIntersection(bullet);
+                }
+            });
         };
         Level1.prototype.Main = function () {
             var _this = this;
@@ -75,12 +85,10 @@ var scenes;
             this.addChild(this._island);
             this.addChild(this._enemy);
             this.addChild(this._player);
-            /*
             //Add each bullet in the array to the scene
-            this._bullets.forEach(bullet => {
-                this.addChild(bullet);
+            this._bulletManager.Bullets.forEach(function (bullet) {
+                _this.addChild(bullet);
             });
-            */
             //Add each cloud in the array to the scene
             this._clouds.forEach(function (cloud) {
                 _this.addChild(cloud);

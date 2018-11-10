@@ -3,7 +3,8 @@ module managers {
         //private vars
         private _bullets: objects.Bullet[];
         private _bulletNum: number;
-        private _currentBulletIndex: number = 0;
+        private _currentBullet: objects.Bullet;
+        private _currentBulletIndex: number;
 
         //public props
         get Bullets(): objects.Bullet[] {
@@ -24,11 +25,12 @@ module managers {
             return this._bullets[this._currentBulletIndex];
         }
         set CurrentBullet(newBullet: objects.Bullet) {
-            this.CurrentBullet = newBullet;
+            this._bullets[this._currentBulletIndex] = newBullet;
         }
 
         //constructor
-        constructor() {
+        constructor(bulletNum: number = 100) {
+            this._bulletNum = bulletNum;
             this.Start();
         }
 
@@ -44,8 +46,7 @@ module managers {
                 this._bullets.push(new objects.Bullet());
             }
 
-            //set the current bullet to the first bullet in the array
-            this.CurrentBullet = this._bullets[this._currentBulletIndex];
+            this._currentBulletIndex = 0;
         }
 
         public Update(): void {
@@ -54,15 +55,20 @@ module managers {
             });
         }
 
+        public Destroy() {
+
+        }
+
         public FireBullet(spawnPoint: util.Vector2, dir: util.Vector2): void {
             this.CurrentBullet.Position = spawnPoint;
+            this.CurrentBullet.x = spawnPoint.x;
+            this.CurrentBullet.y = spawnPoint.y;
             this.CurrentBullet.Direction = dir;
             this.CurrentBullet.IsInPlay = true;
             this._currentBulletIndex++;
             if(this._currentBulletIndex >= this._bullets.length) {
                 this._currentBulletIndex = 0;
             }
-            this.CurrentBullet = this.Bullets[this._currentBulletIndex];
         }
     }
 }
