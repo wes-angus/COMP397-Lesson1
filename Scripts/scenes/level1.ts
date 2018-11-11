@@ -6,7 +6,7 @@ module scenes {
         private _ocean: objects.Ocean;
         private _island: objects.Island;
         private _clouds: objects.Cloud[];
-        private _cloudNum: number = 3;
+        private _cloudNum: number = 2;
         private _enemy: objects.Enemy;
         private _engineSound: createjs.AbstractSoundInstance;
 
@@ -22,6 +22,10 @@ module scenes {
         }
 
         //private methods
+        private SetupInput(): void {
+            this.on("mousedown", managers.Input.OnLeftMouseDown);
+            //this.on("mouseup", managers.Input.OnLeftMouseUp);
+        }
 
         //public methods
         public Reset(): void {
@@ -30,7 +34,9 @@ module scenes {
         public Destroy(): void {
             this.removeAllChildren();
             this._engineSound.stop();
-            //TODO: Clean up bullet mananger
+            this.off("mousedown", managers.Input.OnLeftMouseDown);
+            //this.off("mouseup", managers.Input.OnLeftMouseUp);
+            //TODO: Clean up bullet manager
         }
 
         public Start(): void {
@@ -39,6 +45,7 @@ module scenes {
 
             //Player object
             this._player = new objects.Player();
+            managers.Game.player = this._player;
 
             //Island object
             this._island = new objects.Island();
@@ -59,6 +66,8 @@ module scenes {
             this._bulletManager = new managers.Bullet();
             managers.Game.bulletManager = this._bulletManager;
 
+            this.SetupInput();
+
             this.Main();
         }
 
@@ -71,19 +80,20 @@ module scenes {
             this._clouds.forEach(cloud => {
                 cloud.Update();
                 if (!cloud.IsColliding) {
-                    this._player.checkIntersection(cloud);
+                    this._player.checkCollision(cloud);
                 }
             });
             if (!this._island.IsColliding) {
-                this._player.checkIntersection(this._island);
+                this._player.checkCollision(this._island);
             }
             if (!this._enemy.IsColliding) {
-                this._player.checkIntersection(this._enemy);
+                this._player.checkCollision(this._enemy);
             }
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(bullet => {
                 if (bullet.IsInPlay) {
-                    this._player.checkIntersection(bullet);
+                    this._player.checkCollision(bullet);
+                    this._enemy.checkCollision(bullet);
                 }
             });
         }

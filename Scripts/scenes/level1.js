@@ -19,24 +19,31 @@ var scenes;
         //constructor
         function Level1() {
             var _this = _super.call(this) || this;
-            _this._cloudNum = 3;
+            _this._cloudNum = 2;
             _this.Start();
             return _this;
         }
         //private methods
+        Level1.prototype.SetupInput = function () {
+            this.on("mousedown", managers.Input.OnLeftMouseDown);
+            //this.on("mouseup", managers.Input.OnLeftMouseUp);
+        };
         //public methods
         Level1.prototype.Reset = function () {
         };
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
             this._engineSound.stop();
-            //TODO: Clean up bullet mananger
+            this.off("mousedown", managers.Input.OnLeftMouseDown);
+            //this.off("mouseup", managers.Input.OnLeftMouseUp);
+            //TODO: Clean up bullet manager
         };
         Level1.prototype.Start = function () {
             //Ocean background
             this._ocean = new objects.Ocean();
             //Player object
             this._player = new objects.Player();
+            managers.Game.player = this._player;
             //Island object
             this._island = new objects.Island();
             //Enemy object
@@ -51,6 +58,7 @@ var scenes;
             //Instantiate new bullet manager
             this._bulletManager = new managers.Bullet();
             managers.Game.bulletManager = this._bulletManager;
+            this.SetupInput();
             this.Main();
         };
         Level1.prototype.Update = function () {
@@ -63,19 +71,20 @@ var scenes;
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
                 if (!cloud.IsColliding) {
-                    _this._player.checkIntersection(cloud);
+                    _this._player.checkCollision(cloud);
                 }
             });
             if (!this._island.IsColliding) {
-                this._player.checkIntersection(this._island);
+                this._player.checkCollision(this._island);
             }
             if (!this._enemy.IsColliding) {
-                this._player.checkIntersection(this._enemy);
+                this._player.checkCollision(this._enemy);
             }
             this._bulletManager.Update();
             this._bulletManager.Bullets.forEach(function (bullet) {
                 if (bullet.IsInPlay) {
-                    _this._player.checkIntersection(bullet);
+                    _this._player.checkCollision(bullet);
+                    _this._enemy.checkCollision(bullet);
                 }
             });
         };

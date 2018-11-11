@@ -8,7 +8,7 @@ module objects {
 
         //constructor
         constructor() {
-            super("island", false);
+            super("island", true);
 
             this.Start();
         }

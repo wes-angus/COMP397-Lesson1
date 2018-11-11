@@ -41,7 +41,6 @@ var objects;
                     this.Reset();
                 }
                 this._vel = util.Vector2.Mult(this.Direction, this._speed);
-                console.log("vel: ", this._vel);
             },
             enumerable: true,
             configurable: true
@@ -54,7 +53,7 @@ var objects;
             this.y = this.Position.y;
         };
         Bullet.prototype._checkBounds = function () {
-            if (this.Position.y > 480 || this.Position.y < 0) {
+            if (this.y > 480 || this.y < 0) {
                 this.Direction = util.Vector2.zero();
                 this.IsInPlay = false;
             }
@@ -64,6 +63,7 @@ var objects;
             this.x = -10000;
             this.y = -10000;
             this.Direction = util.Vector2.zero();
+            this._updatePosition();
         };
         Bullet.prototype.Start = function () {
             this._speed = 10;

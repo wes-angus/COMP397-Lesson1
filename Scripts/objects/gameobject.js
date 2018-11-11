@@ -96,25 +96,31 @@ var objects;
         };
         GameObject.prototype.resolveCollision = function (other) {
             other.IsColliding = true;
-            var sound;
             switch (other.name) {
                 case "island":
-                    sound = createjs.Sound.play("yaySound", { volume: 0.1 });
+                    createjs.Sound.play("yaySound", { volume: 0.1 });
                     managers.Game.scoreBoard.Score += 100;
                     break;
                 case "cloud":
-                    sound = createjs.Sound.play("thunderSound", { volume: 0.1 });
+                    createjs.Sound.play("thunderSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Lives--;
                     break;
                 case "enemy":
-                    sound = createjs.Sound.play("explodeSound", { volume: 0.1 });
+                    createjs.Sound.play("explodeSound", { volume: 0.1 });
                     managers.Game.scoreBoard.Lives--;
                     break;
                 case "bullet":
-                    sound = createjs.Sound.play("explodeSound");
-                    sound.volume = 0.1;
-                    managers.Game.scoreBoard.Lives--;
-                    other.IsInPlay = false;
+                    if (this.name === "enemy") {
+                        createjs.Sound.play("explodeSound", { volume: 0.1 });
+                        managers.Game.scoreBoard.Score += 100;
+                        this.Reset();
+                        other.IsInPlay = false;
+                    }
+                    else {
+                        createjs.Sound.play("explodeSound", { volume: 0.1 });
+                        managers.Game.scoreBoard.Lives--;
+                        other.IsInPlay = false;
+                    }
                     break;
             }
             if (managers.Game.scoreBoard.Lives < 1) {

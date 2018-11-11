@@ -1,6 +1,15 @@
 module objects {
     export class Player extends objects.GameObject {
 
+        private _bulletSpawn: util.Vector2;
+        
+        get BulletSpawn(): util.Vector2 {
+            return this._bulletSpawn;
+        }
+        set BulletSpawn(newSpawn: util.Vector2) {
+            this._bulletSpawn = newSpawn;
+        }
+
         //constructors
         constructor(y: number = 435) {
             super("plane", true);
@@ -33,6 +42,7 @@ module objects {
             }
 
             this._updatePosition();
+            this.BulletSpawn = new util.Vector2(this.x, this.y - this.HalfHeight - 2);        
         }
     }
 }

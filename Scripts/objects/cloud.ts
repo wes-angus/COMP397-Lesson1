@@ -8,7 +8,12 @@ module objects {
 
         //constructor
         constructor() {
-            super("cloud", false);
+            super("cloud", true);
+            this.scaleX = 0.75;
+            this.scaleY = 0.75;
+            this.Width = this.getBounds().width;
+            this.Height = this.getBounds().height;
+            this.alpha = 0.75;
 
             this.Start();
         }

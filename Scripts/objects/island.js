@@ -18,7 +18,7 @@ var objects;
         //public props
         //constructor
         function Island() {
-            var _this = _super.call(this, "island", false) || this;
+            var _this = _super.call(this, "island", true) || this;
             _this.Start();
             return _this;
         }

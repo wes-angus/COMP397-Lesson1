@@ -23,6 +23,16 @@ var objects;
             _this.Start();
             return _this;
         }
+        Object.defineProperty(Player.prototype, "BulletSpawn", {
+            get: function () {
+                return this._bulletSpawn;
+            },
+            set: function (newSpawn) {
+                this._bulletSpawn = newSpawn;
+            },
+            enumerable: true,
+            configurable: true
+        });
         //private methods
         //public methods
         Player.prototype.Reset = function () {
@@ -40,6 +50,7 @@ var objects;
                 this.x = this.HalfWidth;
             }
             this._updatePosition();
+            this.BulletSpawn = new util.Vector2(this.x, this.y - this.HalfHeight - 2);
         };
         return Player;
     }(objects.GameObject));

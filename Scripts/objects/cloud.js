@@ -18,7 +18,12 @@ var objects;
         //public props
         //constructor
         function Cloud() {
-            var _this = _super.call(this, "cloud", false) || this;
+            var _this = _super.call(this, "cloud", true) || this;
+            _this.scaleX = 0.75;
+            _this.scaleY = 0.75;
+            _this.Width = _this.getBounds().width;
+            _this.Height = _this.getBounds().height;
+            _this.alpha = 0.75;
             _this.Start();
             return _this;
         }
