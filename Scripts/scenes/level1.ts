@@ -24,6 +24,7 @@ module scenes {
         //private methods
         private SetupInput(): void {
             this.on("mousedown", managers.Input.OnLeftMouseDown);
+            managers.Input.Start();
             //this.on("mouseup", managers.Input.OnLeftMouseUp);
         }
 

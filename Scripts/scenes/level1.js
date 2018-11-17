@@ -26,6 +26,7 @@ var scenes;
         //private methods
         Level1.prototype.SetupInput = function () {
             this.on("mousedown", managers.Input.OnLeftMouseDown);
+            managers.Input.Start();
             //this.on("mouseup", managers.Input.OnLeftMouseUp);
         };
         //public methods

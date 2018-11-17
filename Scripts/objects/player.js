@@ -16,10 +16,13 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         //constructors
-        function Player(y) {
+        function Player(x, y) {
+            if (x === void 0) { x = 320; }
             if (y === void 0) { y = 435; }
             var _this = _super.call(this, "plane", true) || this;
+            _this._speed = 5;
             _this.y = y;
+            _this.x = x;
             _this.Start();
             return _this;
         }
@@ -35,6 +38,38 @@ var objects;
         });
         //private methods
         //public methods
+        Player.prototype.Move = function () {
+            // this.x = managers.Game.stage.mouseX;
+            var dir = -(this.rotation - 90);
+            var degToRad = Math.PI / 180;
+            if (managers.Input.moveRight) {
+                this.x += this._speed;
+            }
+            if (managers.Input.moveLeft) {
+                this.x -= this._speed;
+            }
+            if (managers.Input.moveBack) {
+                this.y += this._speed;
+            }
+            if (managers.Input.moveForward) {
+                this.y -= this._speed;
+            }
+            // Directional (tank) movement
+            /* if(managers.Input.moveRight) {
+                this.rotation += this._speed;
+            }
+            if(managers.Input.moveLeft) {
+                this.rotation -= this._speed;
+            }
+            if(managers.Input.moveBack) {
+                this.x -= Math.cos(dir * degToRad);
+                this.y += Math.sin(dir * degToRad);
+            }
+            if(managers.Input.moveForward) {
+                this.x += Math.cos(dir * degToRad);
+                this.y -= Math.sin(dir * degToRad);
+            } */
+        };
         Player.prototype.Reset = function () {
         };
         Player.prototype.Destroy = function () {
@@ -42,7 +77,6 @@ var objects;
         Player.prototype.Start = function () {
         };
         Player.prototype.Update = function () {
-            this.x = managers.Game.stage.mouseX;
             if (this.x > 640 - this.HalfWidth) {
                 this.x = 640 - this.HalfWidth;
             }

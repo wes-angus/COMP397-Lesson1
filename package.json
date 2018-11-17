@@ -1,7 +1,7 @@
 {
   "name": "comp397-f2018-lesson1",
   "version": "1.0.0",
-  "description": "COMP 397 Lesson 1: CreateJS demo",
+  "description": "COMP 397 Lesson 1: Game Controls",
   "main": "index.js",
   "repository": "https://github.com/wes-angus/COMP397-Lesson1.git",
   "author": "Wesley Angus <wesman93@gmail.com>",
