@@ -20,7 +20,8 @@ var objects;
             if (x === void 0) { x = 320; }
             if (y === void 0) { y = 435; }
             var _this = _super.call(this, "plane", true) || this;
-            _this._speed = 5;
+            _this._horiSpeed = 10;
+            _this._vertSpeed = 8;
             _this.y = y;
             _this.x = x;
             _this.Start();
@@ -40,26 +41,39 @@ var objects;
         //public methods
         Player.prototype.Move = function () {
             // this.x = managers.Game.stage.mouseX;
-            var dir = -(this.rotation - 90);
-            var degToRad = Math.PI / 180;
+            /* if(managers.Input.gamePadManager.Axis[config.GamePad.LS_HORIZONTAL] > 0) {
+                this.x += this._horiSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_HORIZONTAL] < 0) {
+                this.x -= this._horiSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_VERTICAL] > 0) {
+                this.x += this._vertSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_VERTICAL] < 0) {
+                this.x -= this._vertSpeed;
+            } */
             if (managers.Input.moveRight) {
-                this.x += this._speed;
+                this.x += this._horiSpeed;
             }
             if (managers.Input.moveLeft) {
-                this.x -= this._speed;
+                this.x -= this._horiSpeed;
             }
             if (managers.Input.moveBack) {
-                this.y += this._speed;
+                this.y += this._vertSpeed;
             }
             if (managers.Input.moveForward) {
-                this.y -= this._speed;
+                this.y -= this._vertSpeed;
             }
             // Directional (tank) movement
-            /* if(managers.Input.moveRight) {
-                this.rotation += this._speed;
+            /* let dir = -(this.rotation-90);
+            let degToRad = Math.PI / 180;
+            
+            if(managers.Input.moveRight) {
+                this.rotation += this._vertSpeed;
             }
             if(managers.Input.moveLeft) {
-                this.rotation -= this._speed;
+                this.rotation -= this._vertSpeed;
             }
             if(managers.Input.moveBack) {
                 this.x -= Math.cos(dir * degToRad);
@@ -77,11 +91,18 @@ var objects;
         Player.prototype.Start = function () {
         };
         Player.prototype.Update = function () {
+            this.Move();
             if (this.x > 640 - this.HalfWidth) {
                 this.x = 640 - this.HalfWidth;
             }
             else if (this.x < this.HalfWidth) {
                 this.x = this.HalfWidth;
+            }
+            if (this.y > 480 - this.HalfWidth) {
+                this.y = 480 - this.HalfWidth;
+            }
+            else if (this.y < this.HalfWidth) {
+                this.y = this.HalfWidth;
             }
             this._updatePosition();
             this.BulletSpawn = new util.Vector2(this.x, this.y - this.HalfHeight - 2);

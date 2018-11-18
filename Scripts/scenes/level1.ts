@@ -35,6 +35,7 @@ module scenes {
         public Destroy(): void {
             this.removeAllChildren();
             this._engineSound.stop();
+            managers.Input.Stop();
             this.off("mousedown", managers.Input.OnLeftMouseDown);
             //this.off("mouseup", managers.Input.OnLeftMouseUp);
             //TODO: Clean up bullet manager

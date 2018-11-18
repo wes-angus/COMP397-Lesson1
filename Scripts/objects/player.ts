@@ -2,7 +2,8 @@ module objects {
     export class Player extends objects.GameObject {
 
         private _bulletSpawn: util.Vector2;
-        private _speed: number = 5;
+        private _horiSpeed: number = 10;
+        private _vertSpeed: number = 8;
         
         get BulletSpawn(): util.Vector2 {
             return this._bulletSpawn;
@@ -26,28 +27,42 @@ module objects {
         //public methods
         public Move():void {
             // this.x = managers.Game.stage.mouseX;
-            let dir = -(this.rotation-90);
-            let degToRad = Math.PI / 180;
+
+            /* if(managers.Input.gamePadManager.Axis[config.GamePad.LS_HORIZONTAL] > 0) {
+                this.x += this._horiSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_HORIZONTAL] < 0) {
+                this.x -= this._horiSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_VERTICAL] > 0) {
+                this.x += this._vertSpeed;
+            }
+            if(managers.Input.gamePadManager.Axis[config.GamePad.LS_VERTICAL] < 0) {
+                this.x -= this._vertSpeed;
+            } */
 
             if(managers.Input.moveRight) {
-                this.x += this._speed;
+                this.x += this._horiSpeed;
             }
             if(managers.Input.moveLeft) {
-                this.x -= this._speed;
+                this.x -= this._horiSpeed;
             }
             if(managers.Input.moveBack) {
-                this.y += this._speed;
+                this.y += this._vertSpeed;
             }
             if(managers.Input.moveForward) {
-                this.y -= this._speed;
+                this.y -= this._vertSpeed;
             }
 
             // Directional (tank) movement
-            /* if(managers.Input.moveRight) {
-                this.rotation += this._speed;
+            /* let dir = -(this.rotation-90);
+            let degToRad = Math.PI / 180;
+            
+            if(managers.Input.moveRight) {
+                this.rotation += this._vertSpeed;
             }
             if(managers.Input.moveLeft) {
-                this.rotation -= this._speed;
+                this.rotation -= this._vertSpeed;
             }
             if(managers.Input.moveBack) {
                 this.x -= Math.cos(dir * degToRad);
@@ -68,11 +83,19 @@ module objects {
             
         }
         public Update(): void {
+            this.Move();
+
             if (this.x > 640 - this.HalfWidth) {
                 this.x = 640 - this.HalfWidth;
             }
             else if (this.x < this.HalfWidth) {
                 this.x = this.HalfWidth;
+            }
+            if (this.y > 480 - this.HalfWidth) {
+                this.y = 480 - this.HalfWidth;
+            }
+            else if (this.y < this.HalfWidth) {
+                this.y = this.HalfWidth;
             }
 
             this._updatePosition();

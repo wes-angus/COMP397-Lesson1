@@ -35,6 +35,7 @@ var scenes;
         Level1.prototype.Destroy = function () {
             this.removeAllChildren();
             this._engineSound.stop();
+            managers.Input.Stop();
             this.off("mousedown", managers.Input.OnLeftMouseDown);
             //this.off("mouseup", managers.Input.OnLeftMouseUp);
             //TODO: Clean up bullet manager

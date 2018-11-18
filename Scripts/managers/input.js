@@ -4,6 +4,7 @@ var managers;
         function Input() {
         }
         Input.Start = function () {
+            this.gamePadManager = new managers.GamePad(0);
             document.addEventListener('keydown', this.onKeyDown.bind(this), false);
             document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         };

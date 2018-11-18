@@ -7,8 +7,11 @@ module managers {
         public static moveLeft: boolean = false;
         public static moveRight: boolean = false;
         public static enabled: boolean = true;
+        public static gamePadManager: GamePad;
 
         public static Start(): void {
+            this.gamePadManager = new GamePad(0);
+
             document.addEventListener('keydown', this.onKeyDown.bind(this), false);
             document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         }
@@ -39,8 +42,8 @@ module managers {
                 case config.Key.SPACEBAR:
                     this.jump = true;
                     break;
-                    case config.Key.P:
-                        this.enabled = !this.enabled;
+                case config.Key.P:
+                    this.enabled = !this.enabled;
             }
         }
         public static onKeyUp(evt: KeyboardEvent) {
